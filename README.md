@@ -1,2 +1,3 @@
-# BIRD
-Big data Regression for predicting DNase I hypersensitivity
+# BIRD:Big data Regression for predicting DNase I hypersensitivity
+
+
