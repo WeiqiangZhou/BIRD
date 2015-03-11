@@ -421,9 +421,9 @@ void help_info()
 	std::cout << "WIG output: BIRD_predict -b model_file.bin -i input_file.txt -o output_name -w" << std::endl;
 	std::cout << "WIG output will save each sample as a WIG file." << std::endl;
 	std::cout << "Options:" << std::endl;
-	std::cout << "-b   Specify library file. If not sepecified,the program will use model_file.bin in the current directory." << std::endl;
-	std::cout << "-i   Specify input file (gene expression obtained from geneBASE)" << std::endl;
-	std::cout << "-o   Specify output file ." << std::endl;
+	std::cout << "-b   Specify library file. If not sepecified,the program will search for model_file.bin in the current directory." << std::endl;
+	std::cout << "-i   Specify input file (gene expression obtained from geneBASE)." << std::endl;
+	std::cout << "-o   Specify output file." << std::endl;
 	std::cout << "-w   Output WIG file for each sample." << std::endl;
 	return;
 }
