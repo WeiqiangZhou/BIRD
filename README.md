@@ -1,4 +1,4 @@
-###**BIRD**: Big data Regression for predicting DNase I hypersensitivity
+###BIRD: Big data Regression for predicting DNase I hypersensitivity
 
 ####Overview
 BIRD is a software to predict DNase I hypersensitivity (DNase-seq signal) based on gene expression data (currently support exon array data). Using a pre-built model and input gene expression data, BIRD is capable to predict DNase-seq signal genome-wide (~1M genomic loci). BIRD provided two types of outputs: (1) data matrix format or (2) WIG format. Users can easily visualize the predicted DNase-seq signals in UCSC genome browser. 
@@ -26,7 +26,8 @@ To get WIG format output, run:
 ```
 path_to_BIRD/BIRD_predict -b path_to_BIRD/model/model_file.bin -i sample_expr.txt -o output_name -w
 ```
-In this mode, BIRD will generate WIG file for each sample with prefix "output_name." followed by the column name in the input_file.txt
+In this mode, BIRD will generate WIG file for each sample with prefix "output_name." followed by the column name in the input_file.txt.
+
 WIG file can be visualized in UCSC genome browser by adding custom tracks:
 http://genome.ucsc.edu/cgi-bin/hgGateway
 
