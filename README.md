@@ -20,12 +20,12 @@ For detail, see http://web.stanford.edu/group/wonglab/GeneBASE/
 
 After running geneBASE, you will get the gene expression data file (e.g. input_file.txt).
 To get data matrix format output, run:
-```
-**path_to_BIRD/BIRD_predict -b path_to_BIRD/model/model_file.bin -i input_file.txt -o output_file.txt**
-```
+
+>**path_to_BIRD/BIRD_predict -b path_to_BIRD/model/model_file.bin -i input_file.txt -o output_file.txt**
+
 To get WIG format output, run:
 ```
-**path_to_BIRD/BIRD_predict -b path_to_BIRD/model/model_file.bin -i sample_expr.txt -o output_name -w**
+path_to_BIRD/BIRD_predict -b path_to_BIRD/model/model_file.bin -i sample_expr.txt -o output_name -w
 ```
 In this mode, BIRD will generate WIG file for each sample with prefix "output_name." followed by the column name in the input_file.txt
 WIG file can be visualized in UCSC genome browser by adding custom tracks:
