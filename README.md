@@ -6,8 +6,7 @@ BIRD is a software to predict DNase I hypersensitivity (DNase-seq signal) based 
 ####Installation
 Currently, BIRD supports Linux/Unix system. Download the release version of BIRD from: https://github.com/WeiqiangZhou/BIRD/releases/tag/v1.0
 
-unzip BIRD_v1.0.zip
-cd BIRD_v1.0
+unzip BIRD_v1.0.zipcd BIRD_v1.0
 make
 
 ####How to use
@@ -28,7 +27,8 @@ Note:
 Change path_to_BIRD to the path where you install BIRD.
 Examples of the output files can be found in path_to_BIRD/example/
 For help information, run:
-```BIRD_predict -h
+```
+BIRD_predict -h
 Usage:                                                                                                      
 Standard output: BIRD_predict -b model_file.bin -i input_file.txt -o output_file.txt                        
 Standard output will save a matrix contained all predited value in log scale (log2(x+1) transformed).       
