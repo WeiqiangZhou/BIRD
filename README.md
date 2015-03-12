@@ -55,10 +55,10 @@ Change path_to_BIRD to the path where you install BIRD.
 ####Example
 Run:
 ```
-path_to_BIRD/BIRD_predict -b path_to_BIRD/model/model_file.bin -i path_to_BIRD/model/Exon_K562_lab -o K562_DNase.txt
+path_to_BIRD/BIRD_predict -b path_to_BIRD/model/model_file.bin -i path_to_BIRD/example/Exon_K562_lab -o K562_DNase.txt
 ```
 ```
-path_to_BIRD/BIRD_predict -b path_to_BIRD/model/model_file.bin -i path_to_BIRD/model/Exon_K562_lab -o K562_DNase -w
+path_to_BIRD/BIRD_predict -b path_to_BIRD/model/model_file.bin -i path_to_BIRD/example/Exon_K562_lab -o K562_DNase -w
 ```
 You should get three output files: K562_DNase.txt, K562_DNase.Duke.wig, K562_DNase.UW.wig
 
