@@ -29,6 +29,7 @@ path_to_BIRD/BIRD_predict -b path_to_BIRD/model/model_file.bin -i sample_expr.tx
 In this mode, BIRD will generate WIG file for each sample with prefix "output_name." followed by the column name in the input_file.txt.
 
 WIG file can be visualized in UCSC genome browser by adding custom tracks:
+
 http://genome.ucsc.edu/cgi-bin/hgGateway
 
 For help information, run:
