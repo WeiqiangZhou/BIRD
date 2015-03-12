@@ -4,7 +4,9 @@
 BIRD is a software to predict DNase I hypersensitivity (DNase-seq signal) based on gene expression data (currently support exon array data). Using a pre-built model and input gene expression data, BIRD is capable to predict DNase-seq signal genome-wide (~1M genomic loci). BIRD provided two types of outputs: (1) data matrix format or (2) WIG format. Users can easily visualize the predicted DNase-seq signals in UCSC genome browser. 
 
 ####Installation
-Currently, BIRD supports Linux/Unix system. Download the release version of BIRD from: https://github.com/WeiqiangZhou/BIRD/releases/tag/v1.0
+Currently, BIRD supports Linux/Unix system. Download the release version of BIRD from: 
+
+https://github.com/WeiqiangZhou/BIRD/releases/tag/v1.0
 ```
 unzip BIRD_v1.0.zip
 cd BIRD_v1.0
@@ -12,16 +14,18 @@ make
 ```
 ####How to use
 BIRD accepts gene expression output file from geneBASE.
-If you have the raw exon array data (CEL file), use geneBASE to get the gene expression. For detail, see http://web.stanford.edu/group/wonglab/GeneBASE/
+If you have the raw exon array data (CEL file), use geneBASE to get the gene expression. 
+
+For detail, see http://web.stanford.edu/group/wonglab/GeneBASE/
 
 After running geneBASE, you will get the gene expression data file (e.g. input_file.txt).
 To get data matrix format output, run:
 ```
-path_to_BIRD/BIRD_predict -b path_to_BIRD/model/model_file.bin -i input_file.txt -o output_file.txt
+**path_to_BIRD/BIRD_predict -b path_to_BIRD/model/model_file.bin -i input_file.txt -o output_file.txt**
 ```
 To get WIG format output, run:
 ```
-path_to_BIRD/BIRD_predict -b path_to_BIRD/model/model_file.bin -i sample_expr.txt -o output_name -w
+**path_to_BIRD/BIRD_predict -b path_to_BIRD/model/model_file.bin -i sample_expr.txt -o output_name -w**
 ```
 In this mode, BIRD will generate WIG file for each sample with prefix "output_name." followed by the column name in the input_file.txt
 WIG file can be visualized in UCSC genome browser by adding custom tracks:
@@ -29,7 +33,7 @@ http://genome.ucsc.edu/cgi-bin/hgGateway
 
 For help information, run:
 ```
-path_to_BIRD/BIRD_predict -h
+**path_to_BIRD/BIRD_predict -h**
 ```
 ```
 Usage:                                                                                                      
@@ -44,7 +48,9 @@ Options:
 -w   Output WIG file for each sample.                                                                       
 ```
 Note: 
+
 Change path_to_BIRD to the path where you install BIRD.
+
 Examples of the output files can be found in path_to_BIRD/example/
 
 ####Contact
