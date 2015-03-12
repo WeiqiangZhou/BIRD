@@ -24,7 +24,7 @@ path_to_BIRD/BIRD_predict -b path_to_BIRD/model/model_file.bin -i input_file.txt
 ```
 To get WIG format output, run:
 ```
-path_to_BIRD/BIRD_predict -b path_to_BIRD/model/model_file.bin -i sample_expr.txt -o output_name -w
+path_to_BIRD/BIRD_predict -b path_to_BIRD/model/model_file.bin -i input_file.txt -o output_name -w
 ```
 In this mode, BIRD will generate WIG file for each sample with prefix "output_name." followed by the column name in the input_file.txt.
 
