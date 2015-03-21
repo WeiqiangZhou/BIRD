@@ -63,11 +63,13 @@ path_to_BIRD/BIRD_predict -b path_to_BIRD/model/model_file.bin -i path_to_BIRD/e
 You should get three output files: K562_DNase.txt, K562_DNase.Duke.wig, K562_DNase.UW.wig
 ####For large dataset
 It could be memory intensive to run BIRD on dataset with sample size larger than 100 (memory usage > 1G). In such case, it is better to run BIRD via the bash script **BIRD_bash.sh**. It is required that **R** is installed and make sure the **Rscript** command is executable. The bash script will partition the input file into N files according to partition_size (e.g. 100, the number of samples in a partitioned input file). 
+
 To get data matrix format output, run:
 ```
 bash BIRD_bash.sh path_to_BIRD input_file.txt output_name partition_size 0
 ```
 The output files should be **output_name.part1, ..., output_name.partN**.
+
 To get WIG format output, run:
 ```
 bash BIRD_bash.sh path_to_BIRD input_file.txt output_name partition_size 1
