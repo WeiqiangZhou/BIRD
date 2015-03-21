@@ -6,7 +6,11 @@ then echo "Usage: bash BIRD_bash.sh BIRD_directory input_file output_name partit
      echo "WIG output: bash BIRD_bash.sh BIRD_v1.0 input.txt output_name 100 1"
      echo "Standard output: bash BIRD_bash.sh BIRD_v1.0 input.txt output_name 100 0"
 else
-mkdir ./BIRD_tmp
+
+if [ ! -d "BIRD_tmp" ]
+then mkdir ./BIRD_tmp
+fi
+
 Rscript $1/R_script/split_input.r $2 $4
 
 if [ -f "./BIRD_tmp/BIRD_input_part1" ]
