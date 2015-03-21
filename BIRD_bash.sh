@@ -29,6 +29,5 @@ done
 fi
 
 fi
-fi
-
 rm -r ./BIRD_tmp
+fi
