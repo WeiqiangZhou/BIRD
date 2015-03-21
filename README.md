@@ -69,7 +69,7 @@ path_to_BIRD/BIRD_predict -b path_to_BIRD/model/model_file.bin -i path_to_BIRD/e
 ```
 path_to_BIRD/BIRD_predict -b path_to_BIRD/model/model_file.bin -i path_to_BIRD/example/Exon_K562_lab.txt -o K562_DNase -w
 ```
-You should get three output files: **K562_DNase.txt, K562_DNase.Duke.wig, K562_DNase.UW.wig**
+You should get three output files: K562_DNase.txt, K562_DNase.Duke.wig, K562_DNase.UW.wig
 
 Run BIRD_bash.sh:
 ```
@@ -78,7 +78,7 @@ bash path_to_BIRD/BIRD_bash.sh path_to_BIRD path_to_BIRD/example/Exon_K562_lab.t
 ```
 bash path_to_BIRD/BIRD_bash.sh path_to_BIRD path_to_BIRD/example/Exon_K562_lab.txt K562_DNase 1 1
 ```
-You should get four output files: **K562_DNase.txt.part1, K562_DNase.txt.part2, K562_DNase.Duke.wig, K562_DNase.UW.wig**
+You should get four output files: K562_DNase.txt.part1, K562_DNase.txt.part2, K562_DNase.Duke.wig, K562_DNase.UW.wig
 
 ####Note:
 Change **path_to_BIRD** to the path where you install BIRD.
