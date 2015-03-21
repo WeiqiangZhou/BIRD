@@ -20,7 +20,7 @@ cut_size <- floor(sample_size/sep_size)
 sub_idx <- cut(seq(1,sample_size),breaks=cut_size,label=FALSE)
 
 for(i in 1:cut_size){
-write.table(cbind(data_in[,1],data_in[,which(sub_idx==i)+1]),file=paste0("./BIRD_tmp/BIRD_input_part",i),row.names=FALSE,col.names=FALSE,sep="\t",quote=FALSE)
+write.table(data.frame(data_in[,1],data_in[,which(sub_idx==i)+1]),file=paste0("./BIRD_tmp/BIRD_input_part",i),row.names=FALSE,col.names=FALSE,sep="\t",quote=FALSE)
 }
 
 q(save="no")
