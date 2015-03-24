@@ -107,9 +107,15 @@ coef_all <- matrix(data=NA,nrow=dim(DNase_train_sd)[1],ncol=Num_predictor+1)
 predictor_idx <- matrix(data=NA,nrow=dim(DNase_train_sd)[1],ncol=Num_predictor)
 
 for (i in 1:dim(DNase_train_sd)[1]){
+if(DNase_mean_sd[i,2]!=0){
 regress_result <- get_regression_info(DNase_train_sd[i,],Exon_train_mean,Num_predictor)
 coef_all[i,] <- coefficients(regress_result$lm_fit)
 predictor_idx[i,] <- regress_result$predictor
+}
+else{
+coef_all[i,] <- 0
+predictor_idx[i,] <- 1
+}
 }
 
 write.table(coef_all[,-1],file="regress_coef.txt",sep="\t",row.names=FALSE,col.names=FALSE,quote=FALSE) ##b0 is zero and excluded
