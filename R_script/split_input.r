@@ -8,7 +8,7 @@ q(save="no")
 }
 
 sep_size <- as.numeric(input_param[2])
-data_in <- read.table(file=input_param[1],comment.char="")
+data_in <- read.table(file=input_param[1],comment.char="",check.names=FALSE)
 sample_size <- dim(data_in)[2] - 1
 
 if(sample_size<=sep_size){
