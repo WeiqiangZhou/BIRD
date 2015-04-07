@@ -84,6 +84,7 @@ Exon_quantile <- compute_quantile(Exon_train)
 Exon_processed <- standardize_row_train(Exon_train)
 Exon_mean_sd <- Exon_processed$mean_sd
 Exon_train_sd <- Exon_processed$train
+set.seed(2015)
 Exon_cluster <- kmeans(Exon_train_sd, centers=Num_cluster, nstart=5, iter.max=30)    ##different number of cluster can be set here
 
 write.table(Exon_mean_sd[,1],file="gene_mean.txt",sep="\t",row.names=FALSE,col.names=FALSE,quote=FALSE)
