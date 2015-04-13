@@ -42,6 +42,24 @@ int ReadParam(char *infile, int *parameter, char **filename)
 				parameter[4] = temp_int;
 				std::cout << "NumVar=" << temp_int << std::endl;
 			}
+			else if (strcmp(par_name, "DHCluterNum1") == 0)
+			{
+				fscanf(p_in, "%d", &temp_int);
+				parameter[5] = temp_int;
+				std::cout << "DHCluterNum1=" << temp_int << std::endl;
+			}
+			else if (strcmp(par_name, "DHCluterNum2") == 0)
+			{
+				fscanf(p_in, "%d", &temp_int);
+				parameter[6] = temp_int;
+				std::cout << "DHCluterNum2=" << temp_int << std::endl;
+			}
+			else if (strcmp(par_name, "DHCluterNum3") == 0)
+			{
+				fscanf(p_in, "%d", &temp_int);
+				parameter[7] = temp_int;
+				std::cout << "DHCluterNum3=" << temp_int << std::endl;
+			}
 			else if (strcmp(par_name, "GeneQuantile") == 0)
 			{
 				fscanf(p_in, "%s", &temp_char);
@@ -92,6 +110,46 @@ int ReadParam(char *infile, int *parameter, char **filename)
 				fscanf(p_in, "%s", &temp_char);
 				strcpy(filename[9], temp_char);
 			}
+			else if (strcmp(par_name, "DistanceMatrix") == 0)
+			{
+				fscanf(p_in, "%s", &temp_char);
+				strcpy(filename[10], temp_char);
+			}
+			else if (strcmp(par_name, "DHCluster") == 0)
+			{
+				fscanf(p_in, "%s", &temp_char);
+				strcpy(filename[11], temp_char);
+			}
+			else if (strcmp(par_name, "DHClusterCoef1") == 0)
+			{
+				fscanf(p_in, "%s", &temp_char);
+				strcpy(filename[12], temp_char);
+			}
+			else if (strcmp(par_name, "DHClusterCoef2") == 0)
+			{
+				fscanf(p_in, "%s", &temp_char);
+				strcpy(filename[13], temp_char);
+			}
+			else if (strcmp(par_name, "DHClusterCoef3") == 0)
+			{
+				fscanf(p_in, "%s", &temp_char);
+				strcpy(filename[14], temp_char);
+			}
+			else if (strcmp(par_name, "DHClusterPredictor1") == 0)
+			{
+				fscanf(p_in, "%s", &temp_char);
+				strcpy(filename[15], temp_char);
+			}
+			else if (strcmp(par_name, "DHClusterPredictor2") == 0)
+			{
+				fscanf(p_in, "%s", &temp_char);
+				strcpy(filename[16], temp_char);
+			}
+			else if (strcmp(par_name, "DHClusterPredictor3") == 0)
+			{
+				fscanf(p_in, "%s", &temp_char);
+				strcpy(filename[17], temp_char);
+			}
 			else
 			{
 				break;
@@ -105,6 +163,7 @@ int ReadParam(char *infile, int *parameter, char **filename)
 		return 1;
 	}
 
+	std::cout << "Sucessfully read in parameter file." << std::endl;
 	return 0;
 }
 
