@@ -79,7 +79,7 @@ Num_predictor <- 6  ##different number of cluster can be set here
 Bin_size <- 200  ##bin size depends on the preprocess of DNase data, we used 200 in BIRD
 
 ##input data are Exon_data_sample.txt and DNase_data_sample.rda
-Exon_train <- as.matrix(read.table(file="../data/Exon_data_sample.txt",header=TRUE,row.names=1))  ##read gene expression data
+Exon_train <- as.matrix(read.table(file="Exon_data.txt",header=TRUE,row.names=1))  ##read gene expression data
 Exon_quantile <- compute_quantile(Exon_train)
 Exon_processed <- standardize_row_train(Exon_train)
 Exon_mean_sd <- Exon_processed$mean_sd
@@ -95,7 +95,8 @@ write.table(Exon_cluster$cluster,file="cluster_idx.txt",sep="\t",row.names=FALSE
 
 Exon_train_mean <- cluster_data_mean(Exon_train_sd,Exon_cluster$cluster)
 
-load("../data/DNase_data_sample.rda")  ##read DNase-seq data, first three columns contain the genomic locus information
+##Locus-level prediction##
+load("DNase_data.rda")  ##read DNase-seq data, first three columns contain the genomic locus information
 DNase_processed <- standardize_row_train(as.matrix(DNase_data[,-c(1:3)]))
 DNase_mean_sd <- DNase_processed$mean_sd
 DNase_train_sd <- DNase_processed$train
@@ -108,22 +109,64 @@ coef_all <- matrix(data=NA,nrow=dim(DNase_train_sd)[1],ncol=Num_predictor+1)
 predictor_idx <- matrix(data=NA,nrow=dim(DNase_train_sd)[1],ncol=Num_predictor)
 
 for (i in 1:dim(DNase_train_sd)[1]){
-if(DNase_mean_sd[i,2]!=0){
 regress_result <- get_regression_info(DNase_train_sd[i,],Exon_train_mean,Num_predictor)
 coef_all[i,] <- coefficients(regress_result$lm_fit)
 predictor_idx[i,] <- regress_result$predictor
-}
-else{
-coef_all[i,] <- 0
-predictor_idx[i,] <- 1
-}
 }
 
 write.table(coef_all[,-1],file="regress_coef.txt",sep="\t",row.names=FALSE,col.names=FALSE,quote=FALSE) ##b0 is zero and excluded
 write.table(predictor_idx,file="regress_predictor.txt",sep="\t",row.names=FALSE,col.names=FALSE,quote=FALSE)
 
-param_list <- c(dim(DNase_data)[1],dim(Exon_train)[1],Num_cluster,Bin_size,Num_predictor,"gene_quantile.txt","gene_mean.txt","gene_sd.txt","cluster_idx.txt","DNase_mean.txt","DNase_sd.txt","regress_coef.txt","regress_predictor.txt","genomic_loci.txt","gene_name.txt")
-names(param_list) <- c("NumLoci","NumGene","NumCluster","NumBin","NumVar","GeneQuantile","GeneMean","GeneSD","ClusterIndex","DNaseMean","DNaseSD","RegressionCoef","RegressionPredictor","GenomicLoci","GeneName")
+##DH-cluster-level prediction##
+DH_cluster <- list()
+DH_cluster_data <- list()
+DH_cluster_num <- c(1000,2000,5000)
+##Input DH cluster files DH_cluster_1000.txt, DH_cluster_2000.txt and DH_cluster_5000.txt should be included in the same folder.##
+for(j in 1:length(DH_cluster_num)){
+DH_cluster[[j]] <- as.vector(unlist(read.table(file=paste0("DH_cluster_",DH_cluster_num[j],".txt"))))
+DH_cluster_data[[j]] <- cluster_data_mean(DNase_train_sd,DH_cluster[[j]])
+}
+
+Dis_matrix <- matrix(data=NA,nrow=dim(DNase_train_sd)[1],ncol=length(DH_cluster_num))
+for(j in 1:length(DH_cluster_num)){
+for(i in 1:dim(DNase_train_sd)[1]){
+Dis_matrix[i,j] <- cor(DNase_train_sd[i,],DH_cluster_data[[j]][DH_cluster[[j]][i],])
+}
+}
+Dis_matrix[which(Dis_matrix<0)] <- 0
+
+coef_cluster <- list()
+predictor_idx_cluster <- list()
+
+for(j in 1:length(DH_cluster_num)){
+coef_cluster[[j]] <- matrix(data=NA,nrow=dim(DH_cluster_data[[j]])[1],ncol=Num_predictor+1)
+predictor_idx_cluster[[j]] <- matrix(data=NA,nrow=dim(DH_cluster_data[[j]])[1],ncol=Num_predictor)
+for (i in 1:dim(DH_cluster_data[[j]])[1]){
+regress_result <- get_regression_info(DH_cluster_data[[j]][i,],Exon_train_mean,Num_predictor)
+coef_cluster[[j]][i,] <- coefficients(regress_result$lm_fit)
+predictor_idx_cluster[[j]][i,] <- regress_result$predictor
+}
+}
+
+DH_cluster_matrix <- DH_cluster[[1]]
+for(j in 2:length(DH_cluster_num)){
+DH_cluster_matrix <- cbind(DH_cluster_matrix,DH_cluster[[j]])
+}
+
+write.table(DH_cluster_matrix,file="DH_cluster_matrix.txt",sep="\t",row.names=FALSE,col.names=FALSE,quote=FALSE)
+write.table(Dis_matrix,file="distance_matrix.txt",sep="\t",row.names=FALSE,col.names=FALSE,quote=FALSE)
+DH_coef_filenames <- rep(NA,length(DH_cluster_num))
+DH_predictor_filenames <- rep(NA,length(DH_cluster_num))
+for(j in 1:length(DH_cluster_num)){
+write.table(coef_cluster[[j]][,-1],file=paste0("DH_cluster",DH_cluster_num[j],"_coef.txt"),sep="\t",row.names=FALSE,col.names=FALSE,quote=FALSE) ##b0 is zero and excluded
+write.table(predictor_idx_cluster[[j]],file=paste0("DH_cluster",DH_cluster_num[j],"_predictor.txt"),sep="\t",row.names=FALSE,col.names=FALSE,quote=FALSE)
+DH_coef_filenames[j] <- paste0("DH_cluster",DH_cluster_num[j],"_coef.txt")
+DH_predictor_filenames[j] <- paste0("DH_cluster",DH_cluster_num[j],"_predictor.txt")
+}
+
+filenames <- paste(getwd(),c("gene_quantile.txt","gene_mean.txt","gene_sd.txt","cluster_idx.txt","DNase_mean.txt","DNase_sd.txt","regress_coef.txt","regress_predictor.txt","genomic_loci.txt","gene_name.txt","distance_matrix.txt","DH_cluster_matrix.txt",DH_coef_filenames,DH_predictor_filenames),sep="/")
+param_list <- c(dim(DNase_data)[1],dim(Exon_train)[1],Num_cluster,Bin_size,Num_predictor,DH_cluster_num,filenames)
+names(param_list) <- c("NumLoci","NumGene","NumCluster","NumBin","NumVar",paste0("DHCluterNum",c(1:length(DH_cluster_num))),"GeneQuantile","GeneMean","GeneSD","ClusterIndex","DNaseMean","DNaseSD","RegressionCoef","RegressionPredictor","GenomicLoci","GeneName","DistanceMatrix","DHCluster",paste0("DHClusterCoef",c(1:length(DH_cluster_num))),paste0("DHClusterPredictor",c(1:length(DH_cluster_num))))
 write.table(param_list,file="par_file.txt",sep="\t",col.names=FALSE,quote=FALSE)
 
 q(save="no")
