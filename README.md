@@ -8,8 +8,8 @@ Currently, BIRD supports Linux/Unix system. Download the latest version of BIRD 
 
 https://github.com/WeiqiangZhou/BIRD/releases/download/v1.0.1/BIRD_v1.0.1.zip
 ```
-unzip BIRD_v1.0.zip
-cd BIRD_v1.0
+unzip BIRD_v1.0.1.zip
+cd BIRD_v1.0.1
 make
 ```
 ####How to use
