@@ -201,15 +201,15 @@ void ClusterMean(double **data_matrix, double **data_mean, int *cluster_idx, int
 	return;
 }
 
-int ReadinModel(char filename[255], double *quantile_in, double *exon_mean, double *exon_sd, double **coef, double *DNase_mean, double *DNase_sd, int **pre_idx, char **TC_id, int *cluster_idx, char **select_loci, int p_length, int var_length, int loci_length)
+int ReadinModel(char filename[255], double *quantile_in, double *exon_mean, double *exon_sd, double **coef, double *DNase_mean, double *DNase_sd, int **pre_idx, char **TC_id, int *cluster_idx, char **select_loci, int p_length, int var_length, int loci_length, double **dis_matrix, int **DH_cluster, double **DH_coef1, double **DH_coef2, double **DH_coef3, int **DH_pre_idx1, int **DH_pre_idx2, int **DH_pre_idx3, int DH_num1, int DH_num2, int DH_num3)
 {
-	int dump[5];
+	int dump[8];
 	FILE *pFile;
 	pFile = fopen(filename, "rb");
 	if (pFile != NULL)
 	{
 		std::cout << "Reading library file " << filename << std::endl;
-		fread(dump, sizeof(int), 5, pFile);
+		fread(dump, sizeof(int), 8, pFile);
 		fread(quantile_in, sizeof(double), p_length, pFile);
 		fread(exon_mean, sizeof(double), p_length, pFile);
 		fread(exon_sd, sizeof(double), p_length, pFile);
@@ -232,6 +232,38 @@ int ReadinModel(char filename[255], double *quantile_in, double *exon_mean, doub
 		{
 			fread(TC_id[k], sizeof(char), 30, pFile);
 		}
+		for (int k = 0; k < 3; k++)
+		{
+			fread(dis_matrix[k], sizeof(double), loci_length, pFile);
+		}
+		for (int k = 0; k < 3; k++)
+		{
+			fread(DH_cluster[k], sizeof(int), loci_length, pFile);
+		}
+		for (int k = 0; k < var_length; k++)
+		{
+			fread(DH_coef1[k], sizeof(double), DH_num1, pFile);
+		}
+		for (int k = 0; k < var_length; k++)
+		{
+			fread(DH_coef2[k], sizeof(double), DH_num2, pFile);
+		}
+		for (int k = 0; k < var_length; k++)
+		{
+			fread(DH_coef3[k], sizeof(double), DH_num3, pFile);
+		}
+		for (int k = 0; k < var_length; k++)
+		{
+			fread(DH_pre_idx1[k], sizeof(int), DH_num1, pFile);
+		}
+		for (int k = 0; k < var_length; k++)
+		{
+			fread(DH_pre_idx2[k], sizeof(int), DH_num2, pFile);
+		}
+		for (int k = 0; k < var_length; k++)
+		{
+			fread(DH_pre_idx3[k], sizeof(int), DH_num3, pFile);
+		}
 	}
 	else
 	{
@@ -243,20 +275,23 @@ int ReadinModel(char filename[255], double *quantile_in, double *exon_mean, doub
 	return 0;
 }
 
-int ReadPar(char filename[255], int &loci_size, int &predictor_size, int &cluster_size, int &bin_size, int &var_size)
+int ReadPar(char filename[255], int &loci_size, int &predictor_size, int &cluster_size, int &bin_size, int &var_size, int &DH_num1, int &DH_num2, int &DH_num3)
 {
 	FILE *pFile;
-	int param[5];
+	int param[8];
 	pFile = fopen(filename, "rb");
 	if (pFile != NULL)
 	{
 		std::cout << "Reading model parameter..." << std::endl;
-		fread(param, sizeof(int), 5, pFile);
+		fread(param, sizeof(int), 8, pFile);
 		loci_size = param[0];
 		predictor_size = param[1];
 		cluster_size = param[2];
 		bin_size = param[3];
 		var_size = param[4];
+		DH_num1 = param[5];
+		DH_num2 = param[6];
+		DH_num3 = param[7];
 		fclose(pFile);
 
 	}
@@ -280,6 +315,20 @@ void Regression(double **predictor, double **output, double **coef, int **predic
 				output[j][i] += coef[k][i] * predictor[j][predictor_idx[k][i] - 1];               //index from 1 in library file.
 			}
 
+		}
+	}
+	return;
+}
+
+void ModelAverage(double **output, double **DH_pre1, double **DH_pre2, double **DH_pre3, double **dis_matrix, int **DH_cluster, int loci_length, int sample_size)
+{
+	double weight;
+	for (int i = 0; i < loci_length; i++)
+	{
+		for (int j = 0; j < sample_size; j++)
+		{
+			weight = dis_matrix[0][i] + dis_matrix[1][i] + dis_matrix[2][i] + 1;
+			output[j][i] = (output[j][i] + DH_pre1[j][DH_cluster[0][i] - 1] * dis_matrix[0][i] + DH_pre2[j][DH_cluster[1][i] - 1] * dis_matrix[1][i] + DH_pre3[j][DH_cluster[2][i] - 1] * dis_matrix[2][i]) / weight ;               //index from 1 in library file.
 		}
 	}
 	return;
