@@ -3,8 +3,8 @@
 if [ $# -ne 5 ]
 then echo "Usage: bash BIRD_bash.sh BIRD_directory input_file output_name partition_size wig_mode"
      echo "Example:"
-     echo "WIG output: bash BIRD_bash.sh BIRD_v1.0 input.txt output_name 100 1"
-     echo "Standard output: bash BIRD_bash.sh BIRD_v1.0 input.txt output_name 100 0"
+     echo "WIG output: bash BIRD_bash.sh BIRD_v1.0.1 input.txt output_name 100 1"
+     echo "Standard output: bash BIRD_bash.sh BIRD_v1.0.1 input.txt output_name 100 0"
 else
 
 if [ ! -d "BIRD_tmp" ]
