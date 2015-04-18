@@ -21,14 +21,14 @@ then
 for file in ./BIRD_tmp/BIRD_input_part*
 do
     echo "Processing ${file}"
-    BIRD_predict -b $1/model/model_file.bin -i ${file} -o $3 -w
+    $1/BIRD_predict -b $1/model/model_file.bin -i ${file} -o $3 -w
 done
 else
 for file in ./BIRD_tmp/BIRD_input_part*
 do
     echo "Processing ${file}"
     part_num=${file##*BIRD_input_}
-    BIRD_predict -b $1/model/model_file.bin -i ${file} -o $3.${part_num}
+    $1/BIRD_predict -b $1/model/model_file.bin -i ${file} -o $3.${part_num}
 done
 fi
 
