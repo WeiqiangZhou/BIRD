@@ -432,8 +432,12 @@ int WriteWIG(double **data_out, char **select_idx, std::vector<std::string> outn
 						{
 							value = 0;
 						}
+						else if (value > 10000)
+						{
+							value = 10000;
+						}
 						count++;
-						fprintf(pFile, "%d\t%lf\n", (*it), value);        //report 0 truncated read count value.
+						fprintf(pFile, "%d\t%lf\n", (*it), value);        //report value is limited from 0 to 10000.
 					}
 				}
 				//print chrX
@@ -445,8 +449,12 @@ int WriteWIG(double **data_out, char **select_idx, std::vector<std::string> outn
 					{
 						value = 0;
 					}
+					else if (value > 10000)
+					{
+						value = 10000;
+					}
 					count++;
-					fprintf(pFile, "%d\t%lf\n", (*it), value);       //report 0 truncated read count value.
+					fprintf(pFile, "%d\t%lf\n", (*it), value);       
 				}
 
 				fclose(pFile);
