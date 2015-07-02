@@ -5,6 +5,9 @@ apt-cel-convert --format xda --cel-files convert_file_list.txt -i
 ```
 ####Run GeneBASE
 The Affymetrix tissue panel data is recommended to be combined with the user exon array data, which can be obtained from http://www.affymetrix.com/support/technical/sample_data/exon_array_data.affx
+
+The required library files can be obtained from http://www.affymetrix.com/support/technical/byproduct.affx?product=huexon-st
+
 To run GeneBASE:
 ```
 ProbeEffects -par PAR_file.txt
