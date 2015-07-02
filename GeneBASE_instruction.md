@@ -3,6 +3,11 @@ The format of CEL files may need to be converted first using apt-cel-convert fro
 ```
 apt-cel-convert --format xda --cel-files input_file_list.txt -i
 ```
+Example of input_file_list.txt
+```
+cel_files
+user_exon_array.CEL
+```
 ####Run GeneBASE
 The Affymetrix tissue panel data is recommended to be combined with the user exon array data, which can be obtained from http://www.affymetrix.com/support/technical/sample_data/exon_array_data.affx
 
@@ -12,7 +17,7 @@ To run GeneBASE:
 ```
 ProbeEffects -par PAR_file.txt
 ```
-####Example of PAR_file.txt
+Example of PAR_file.txt
 ```
 [log]
 logfile	Log_file.txt
