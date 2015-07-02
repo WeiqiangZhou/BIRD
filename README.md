@@ -93,7 +93,7 @@ How to use Tophat and Cufflinks, see https://github.com/WeiqiangZhou/BIRD/blob/m
 ####Note:
 Change **path_to_BIRD** to the path where you install BIRD.
 
-Genomic information in the current version of BIRD is based on human genome hg19.
+Genomic information in the current version of BIRD is based on **human genome hg19**.
 
 ####Contact
 wzhou14@jhu.edu
