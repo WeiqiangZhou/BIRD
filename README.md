@@ -12,7 +12,7 @@ unzip BIRD_v1.0.1.zip
 cd BIRD_v1.0.1
 make
 ```
-####How to use (For exon array)
+####How to use (for exon array)
 BIRD accepts gene expression output file from geneBASE.
 If you have the raw exon array data (CEL file), use GeneBASE to get the gene expression. 
 
@@ -84,7 +84,9 @@ bash path_to_BIRD/BIRD_bash.sh path_to_BIRD path_to_BIRD/example/Exon_K562_lab.t
 ```
 You should get four output files: K562_DNase.txt.part1, K562_DNase.txt.part2, K562_DNase.Duke.wig, K562_DNase.UW.wig
 
-####How to use (For RNA-seq)
+####How to use (for RNA-seq)
+First use Tophat and Cufflinks to obtain the FPKM value for the sample.
+
 
 ####Note:
 Change **path_to_BIRD** to the path where you install BIRD.
