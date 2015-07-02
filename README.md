@@ -93,8 +93,18 @@ How to use Tophat and Cufflinks, see https://github.com/WeiqiangZhou/BIRD/blob/m
 
 After obtaining the gene expression data **genes.fpkm_tracking**, used the R script **match_input.r** to prepare the input file for BIRD.
 ```
-Rscript path_to_BIRD/R_script/match_input.r genes.fpkm_tracking path_to_BIRD/model/ref_gene.txt RNA_seq_input.txt
+Rscript path_to_BIRD/R_script/match_input.r genes.fpkm_tracking path_to_BIRD/model/ref_gene.txt genes.fpkm_tracking.match
 ```
+Then run the **BIRD_predict** program for prediction (use model file **RNAseq_model_file.bin**):
+To get data matrix format output:
+```
+path_to_BIRD/BIRD_predict -b path_to_BIRD/model/RNAseq_model_file.bin -i genes.fpkm_tracking.match -o output_file.txt
+```
+To get WIG format output, run:
+```
+path_to_BIRD/BIRD_predict -b path_to_BIRD/model/RNAseq_model_file.bin -i genes.fpkm_tracking.match -o output_name -w
+```
+
 ####Note:
 Change **path_to_BIRD** to the path where you install BIRD.
 
