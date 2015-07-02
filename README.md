@@ -18,7 +18,7 @@ If you have the raw exon array data (CEL file), use GeneBASE to get the gene exp
 
 To download and install GeneBASE, see http://web.stanford.edu/group/wonglab/GeneBASE/
 
-How to use GeneBASE, see 
+How to use GeneBASE, see https://github.com/WeiqiangZhou/BIRD/blob/master/GeneBASE_instruction
 
 After running geneBASE, you will get the gene expression data file (e.g. input_file.txt).
 
