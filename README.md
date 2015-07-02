@@ -14,9 +14,11 @@ make
 ```
 ####How to use
 BIRD accepts gene expression output file from geneBASE.
-If you have the raw exon array data (CEL file), use geneBASE to get the gene expression. 
-To download and install, see http://web.stanford.edu/group/wonglab/GeneBASE/
-How to run GeneBASE, see 
+If you have the raw exon array data (CEL file), use GeneBASE to get the gene expression. 
+
+To download and install GeneBASE, see http://web.stanford.edu/group/wonglab/GeneBASE/
+
+How to use GeneBASE, see 
 
 After running geneBASE, you will get the gene expression data file (e.g. input_file.txt).
 
