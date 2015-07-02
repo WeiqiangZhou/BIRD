@@ -13,7 +13,7 @@ cd BIRD_v1.0.1
 make
 ```
 ####How to use (for exon array)
-BIRD accepts gene expression output file from geneBASE.
+BIRD accepts gene expression output file from **GeneBASE**.
 If you have the raw exon array data (CEL file), use GeneBASE to get the gene expression. 
 
 To download and install GeneBASE, see http://web.stanford.edu/group/wonglab/GeneBASE/
