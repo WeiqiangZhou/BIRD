@@ -18,7 +18,7 @@ If you have the raw exon array data (CEL file), use GeneBASE to get the gene exp
 
 To download and install GeneBASE, see http://web.stanford.edu/group/wonglab/GeneBASE/
 
-How to use GeneBASE, see https://github.com/WeiqiangZhou/BIRD/blob/master/GeneBASE_instruction.md
+How to use GeneBASE, see https://github.com/WeiqiangZhou/BIRD/blob/master/exonarray_instruction.md
 
 After running geneBASE, you will get the gene expression data file (e.g. input_file.txt).
 
@@ -88,7 +88,7 @@ You should get four output files: K562_DNase.txt.part1, K562_DNase.txt.part2, K5
 First use Tophat and Cufflinks to obtain the FPKM value for the sample.
 To download and install Tophat and Cufflinks, see https://ccb.jhu.edu/software/tophat/tutorial.shtml and http://cole-trapnell-lab.github.io/cufflinks/getting_started/
 
-How to use Tophat and Cufflinks, see 
+How to use Tophat and Cufflinks, see https://github.com/WeiqiangZhou/BIRD/blob/master/RNAseq_instruction.md
 
 ####Note:
 Change **path_to_BIRD** to the path where you install BIRD.
