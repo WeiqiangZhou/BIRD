@@ -93,7 +93,7 @@ How to use Tophat and Cufflinks, see https://github.com/WeiqiangZhou/BIRD/blob/m
 
 After obtaining the gene expression data **genes.fpkm_tracking**, used the R script **match_input.r** to prepare the input file for BIRD.
 ```
-Rscript path_to_BIRD/R_script/match_input.r genes.fpkm_tracking path_to_BIRD/model/ref_gene.txt
+Rscript path_to_BIRD/R_script/match_input.r genes.fpkm_tracking path_to_BIRD/model/ref_gene.txt RNA_seq_input.txt
 ```
 ####Note:
 Change **path_to_BIRD** to the path where you install BIRD.
