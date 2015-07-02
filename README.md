@@ -88,6 +88,7 @@ You should get four output files: K562_DNase.txt.part1, K562_DNase.txt.part2, K5
 First use Tophat and Cufflinks to obtain the FPKM value for the sample.
 To download and install Tophat and Cufflinks, see https://ccb.jhu.edu/software/tophat/tutorial.shtml and http://cole-trapnell-lab.github.io/cufflinks/getting_started/
 
+How to use Tophat and Cufflinks, see 
 
 ####Note:
 Change **path_to_BIRD** to the path where you install BIRD.
