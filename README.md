@@ -96,6 +96,7 @@ After obtaining the gene expression data **genes.fpkm_tracking**, used the R scr
 Rscript path_to_BIRD/R_script/match_input.r genes.fpkm_tracking path_to_BIRD/model/ref_gene.txt genes.fpkm_tracking.match
 ```
 Then run the **BIRD_predict** program for prediction (use model file **RNAseq_model_file.bin**):
+
 To get data matrix format output:
 ```
 path_to_BIRD/BIRD_predict -b path_to_BIRD/model/RNAseq_model_file.bin -i genes.fpkm_tracking.match -o output_file.txt
