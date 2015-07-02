@@ -85,12 +85,13 @@ bash path_to_BIRD/BIRD_bash.sh path_to_BIRD path_to_BIRD/example/Exon_K562_lab.t
 You should get four output files: K562_DNase.txt.part1, K562_DNase.txt.part2, K562_DNase.Duke.wig, K562_DNase.UW.wig
 
 ####How to use (for RNA-seq)
-First use Tophat and Cufflinks to obtain the FPKM value for the input sample.
+First, use **Tophat** and **Cufflinks** to obtain the FPKM value for the input sample.
 
 To download and install Tophat and Cufflinks, see https://ccb.jhu.edu/software/tophat/tutorial.shtml and http://cole-trapnell-lab.github.io/cufflinks/getting_started/
 
 How to use Tophat and Cufflinks, see https://github.com/WeiqiangZhou/BIRD/blob/master/RNAseq_instruction.md
 
+Then, 
 ####Note:
 Change **path_to_BIRD** to the path where you install BIRD.
 
