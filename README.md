@@ -20,7 +20,7 @@ To download and install GeneBASE, see http://web.stanford.edu/group/wonglab/Gene
 
 How to use GeneBASE, see https://github.com/WeiqiangZhou/BIRD/blob/master/exonarray_instruction.md
 
-After running geneBASE, you will get the gene expression data file (e.g. input_file.txt).
+After running GeneBASE, you will get the gene expression data file (e.g. input_file.txt).
 
 To get data matrix format output, run:
 ```
