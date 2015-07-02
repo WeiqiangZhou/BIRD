@@ -53,7 +53,7 @@ Options:
 -w   Output WIG file for each sample.                                                                       
 ```
 ####For large dataset
-It could be memory intensive to run BIRD on dataset with sample size larger than 100 (memory usage > 1G). In such case, it is better to run BIRD via the bash script **BIRD_bash.sh**. It is required that **R** is installed and make sure the **Rscript** command is executable. The bash script will partition the input file into N files according to partition_size (e.g. 100, the number of samples in a partitioned input file). 
+It could be memory intensive to run BIRD on dataset with sample size larger than 100 (memory usage > 1G). In such cases, it is recommended to run BIRD via the bash script **BIRD_bash.sh**. It is required that **R** is installed and make sure the **Rscript** command is executable. The bash script will partition the input file into N files according to partition_size (e.g. 100, the number of samples in a partitioned input file). 
 
 To get data matrix format output, run:
 ```
