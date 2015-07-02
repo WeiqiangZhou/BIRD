@@ -1,7 +1,7 @@
 ###BIRD: Big data Regression for predicting DNase I hypersensitivity
 
 ####Overview
-BIRD is a software to predict DNase I hypersensitivity (DNase-seq signal) based on gene expression data (currently support exon array data). Using a pre-built model and input gene expression data, BIRD is capable to predict DNase-seq signal genome-wide (~1M genomic loci). BIRD provided two types of outputs: (1) data matrix format or (2) WIG format. Users can easily visualize the predicted DNase-seq signals in UCSC genome browser. 
+BIRD is a software to predict DNase I hypersensitivity (DNase-seq signal) based on gene expression data (support both human exon array and RNA-seq data). Using a pre-built model and input gene expression data, BIRD is capable to predict DNase-seq signal genome-wide (~1M genomic loci). BIRD provided two types of outputs: (1) data matrix format or (2) WIG format. Users can easily visualize the predicted DNase-seq signals in UCSC genome browser. 
 
 ####Installation
 Currently, BIRD supports Linux/Unix system. Download the latest version of BIRD from: 
