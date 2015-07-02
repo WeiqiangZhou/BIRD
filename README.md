@@ -48,7 +48,7 @@ WIG output: BIRD_predict -b model_file.bin -i input_file.txt -o output_name -w
 WIG output will save each sample as a WIG file.                                                             
 Options:                                                                                                    
 -b   Specify library file. If not sepecified,the program will use model_file.bin in the current directory.  
--i   Specify input file (gene expression obtained from geneBASE).                                           
+-i   Specify input file (gene expression obtained from GeneBASE).                                           
 -o   Specify output file.                                                                                   
 -w   Output WIG file for each sample.                                                                       
 ```
