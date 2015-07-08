@@ -11,6 +11,7 @@ https://github.com/WeiqiangZhou/BIRD/releases/download/v1.0.2/BIRD_v1.0.2.zip
 unzip BIRD_v1.0.2.zip
 cd BIRD_v1.0.2
 make
+
 ```
 ####How to use (for exon array)
 BIRD accepts gene expression output file from **GeneBASE**.
