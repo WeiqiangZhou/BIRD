@@ -1,3 +1,11 @@
+#############################################################################################################################
+#                                                    README
+# This file contains the R code for generating the BIRD prediction model.
+# Results for clustering DHSs into 1000, 2000 and 5000 clusters should be provided. 
+# See https://github.com/fangdu64/BDT for details of how to install and use BigKmeans.
+# After generating the required files, use [BIRD_build_library -i par_file.txt -o model_file.bin] to compile the model file 
+#############################################################################################################################
+
 ####functions####
 ##get regression coefficient and predictors
 get_regression_info <- function(DNase_train,Exon_train_mean,top_n){
@@ -75,17 +83,17 @@ compute_quantile <- function(train_exon){
 
 ##main script##
 Num_cluster <- 1500   ##different number of cluster can be set here
-Num_predictor <- 6  ##different number of cluster can be set here
+Num_predictor <- 7  ##different number of cluster can be set here
 Bin_size <- 200  ##bin size depends on the preprocess of DNase data, we used 200 in BIRD
 
 ##input data are Exon_data_sample.txt and DNase_data_sample.rda
-Exon_train <- as.matrix(read.table(file="Exon_data.txt",header=TRUE,row.names=1))  ##read gene expression data
-Exon_quantile <- compute_quantile(Exon_train)
-Exon_processed <- standardize_row_train(Exon_train)
+Exon_train <- as.matrix(read.table(file="Exon_data.txt",header=TRUE,row.names=1))  ##read quantile normalized gene expression data
+Exon_quantile <- compute_quantile(Exon_train) #calculate the quantiles of the gene expression data
+Exon_processed <- standardize_row_train(Exon_train) #standardize gene expression data
 Exon_mean_sd <- Exon_processed$mean_sd
 Exon_train_sd <- Exon_processed$train
 set.seed(2015)
-Exon_cluster <- kmeans(Exon_train_sd, centers=Num_cluster, nstart=5, iter.max=30)    ##different number of cluster can be set here
+Exon_cluster <- kmeans(Exon_train_sd, centers=Num_cluster, nstart=10, iter.max=50)    ##cluster gene expression
 
 write.table(Exon_mean_sd[,1],file="gene_mean.txt",sep="\t",row.names=FALSE,col.names=FALSE,quote=FALSE)
 write.table(Exon_mean_sd[,2],file="gene_sd.txt",sep="\t",row.names=FALSE,col.names=FALSE,quote=FALSE)
@@ -93,11 +101,11 @@ write.table(Exon_quantile,file="gene_quantile.txt",sep="\t",row.names=FALSE,col.
 write.table(row.names(Exon_train),file="gene_name.txt",sep="\t",row.names=FALSE,col.names=FALSE,quote=FALSE)
 write.table(Exon_cluster$cluster,file="cluster_idx.txt",sep="\t",row.names=FALSE,col.names=FALSE,quote=FALSE)
 
-Exon_train_mean <- cluster_data_mean(Exon_train_sd,Exon_cluster$cluster)
+Exon_train_mean <- cluster_data_mean(Exon_train_sd,Exon_cluster$cluster) #calculated average gene expression within each cluster
 
 ##Locus-level prediction##
 load("DNase_data.rda")  ##read DNase-seq data, first three columns contain the genomic locus information
-DNase_processed <- standardize_row_train(as.matrix(DNase_data[,-c(1:3)]))
+DNase_processed <- standardize_row_train(as.matrix(DNase_data[,-c(1:3)])) #standardize DNase-seq data
 DNase_mean_sd <- DNase_processed$mean_sd
 DNase_train_sd <- DNase_processed$train
 
@@ -109,9 +117,9 @@ coef_all <- matrix(data=NA,nrow=dim(DNase_train_sd)[1],ncol=Num_predictor+1)
 predictor_idx <- matrix(data=NA,nrow=dim(DNase_train_sd)[1],ncol=Num_predictor)
 
 for (i in 1:dim(DNase_train_sd)[1]){
-regress_result <- get_regression_info(DNase_train_sd[i,],Exon_train_mean,Num_predictor)
-coef_all[i,] <- coefficients(regress_result$lm_fit)
-predictor_idx[i,] <- regress_result$predictor
+regress_result <- get_regression_info(DNase_train_sd[i,],Exon_train_mean,Num_predictor) #build regression model for each DHS
+coef_all[i,] <- coefficients(regress_result$lm_fit) #get regression coefficients
+predictor_idx[i,] <- regress_result$predictor #get predictor index
 }
 
 write.table(coef_all[,-1],file="regress_coef.txt",sep="\t",row.names=FALSE,col.names=FALSE,quote=FALSE) ##b0 is zero and excluded
@@ -130,7 +138,7 @@ DH_cluster_data[[j]] <- cluster_data_mean(DNase_train_sd,DH_cluster[[j]])
 Dis_matrix <- matrix(data=NA,nrow=dim(DNase_train_sd)[1],ncol=length(DH_cluster_num))
 for(j in 1:length(DH_cluster_num)){
 for(i in 1:dim(DNase_train_sd)[1]){
-Dis_matrix[i,j] <- cor(DNase_train_sd[i,],DH_cluster_data[[j]][DH_cluster[[j]][i],])
+Dis_matrix[i,j] <- cor(DNase_train_sd[i,],DH_cluster_data[[j]][DH_cluster[[j]][i],]) #calculate the weights for model averaging
 }
 }
 Dis_matrix[which(Dis_matrix<0)] <- 0
