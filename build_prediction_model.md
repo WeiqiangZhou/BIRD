@@ -21,4 +21,5 @@ TranscriptCluster   AG04449   AG04450   AG10803      AoAF        BJ       Hac
           2359483  8.043600  7.526427  7.528059  7.525314  7.805880  7.714811
 ```
 
-###Step 1
+#####Step 1
+Use the R code in https://github.com/WeiqiangZhou/BIRD/blob/master/R_script/get_param.r to obtain the optimal number of gene clusters K and number of predictors N.
