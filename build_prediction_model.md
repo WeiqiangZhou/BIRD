@@ -22,9 +22,7 @@ TranscriptCluster   AG04449   AG04450   AG10803      AoAF        BJ       Hac
 ```
 
 You should also install BigKmeans and BIRD. 
-
 See https://github.com/fangdu64/BDT for details of how to install BigKmeans.
-
 See https://github.com/WeiqiangZhou/BIRD for details of how to install BIRD.
 
 #####Step 1:
