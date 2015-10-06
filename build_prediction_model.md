@@ -25,13 +25,16 @@ TranscriptCluster   AG04449   AG04450   AG10803      AoAF        BJ       Hac
 Use the R code in https://github.com/WeiqiangZhou/BIRD/blob/master/R_script/get_param.r to obtain the optimal number of gene clusters K and number of predictors N.
 
 #####Step 2:
-Use the R code in https://github.com/WeiqiangZhou/BIRD/blob/master/R_script/get_DHS_cluster.r to obtain the clustering results of the DNase-seq data. BigKmeans should be already installed. See https://github.com/fangdu64/BDT for details of how to install BigKmeans.
+Use the R code in https://github.com/WeiqiangZhou/BIRD/blob/master/R_script/get_DHS_cluster.r to obtain the clustering results of the DNase-seq data. BigKmeans should be already installed. 
+
+See https://github.com/fangdu64/BDT for details of how to install BigKmeans.
 
 #####Step 3:
 Use the R code in https://github.com/WeiqiangZhou/BIRD/blob/master/R_script/get_param.r to obtain the required files to build the BIRD model.
 
 #####Step 4:
 BIRD should be already installed. See https://github.com/WeiqiangZhou/BIRD for details of how to install BIRD.
+
 Run the following command to compile the BIRD model file:
 ```
 BIRD_build_library -i par_file.txt -o model_file.bin
