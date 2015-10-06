@@ -21,7 +21,7 @@ TranscriptCluster   AG04449   AG04450   AG10803      AoAF        BJ       Hac
           2359483  8.043600  7.526427  7.528059  7.525314  7.805880  7.714811
 ```
 
-You should first install BigKmeans and BIRD. See https://github.com/fangdu64/BDT for details of how to install BigKmeans. See https://github.com/WeiqiangZhou/BIRD for details of how to install BIRD.
+You should first install **BigKmeans** and **BIRD**. See https://github.com/fangdu64/BDT for details of how to install BigKmeans. See https://github.com/WeiqiangZhou/BIRD for details of how to install BIRD.
 
 Then, apply the following steps:
 #####Step 1:
@@ -38,4 +38,4 @@ Run the following command to compile the BIRD model file:
 ```
 BIRD_build_library -i par_file.txt -o model_file.bin
 ```
-Now, you should get the prediction model file model_file.bin
+Now, you should get the prediction model file **model_file.bin**.
