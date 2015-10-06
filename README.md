@@ -115,5 +115,6 @@ Change **path_to_BIRD** to the path where you install BIRD.
 Genomic information in the current version of BIRD is based on **human genome hg19**.
 
 ####Contact
+**Weiqiang Zhou**
 wzhou14@jhu.edu
 
