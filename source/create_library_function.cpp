@@ -294,6 +294,7 @@ int ReadMatrix_i(char *file, int **data)
 
 }
 
+//read in a vector (string)
 int ReadName(char *file, char **data)
 {
 	std::ifstream infile(file);
