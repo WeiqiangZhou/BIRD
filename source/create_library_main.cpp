@@ -123,6 +123,7 @@ int main(int argc, char *argv[])
 		row_name[j] = new char[30];
 	}
 
+        //read in all required files
 	if (ReadVector_d(filelist[0], uw_quantile)){ return 1; }
 	if (ReadVector_d(filelist[1], exon_mean)){ return 1; }
 	if (ReadVector_d(filelist[2], exon_sd)){ return 1; }
@@ -142,6 +143,7 @@ int main(int argc, char *argv[])
 	if (ReadMatrix_i(filelist[16], DH_pre_idx2)){ return 1; }
 	if (ReadMatrix_i(filelist[17], DH_pre_idx3)){ return 1; }
 
+        //combine all information into one binary file
 	p_out = fopen(outfile, "wb");
 	if (p_out != NULL)
 	{
