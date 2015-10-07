@@ -31,7 +31,7 @@ Use the R code in https://github.com/WeiqiangZhou/BIRD/blob/master/R_script/get_
 Use the R code in https://github.com/WeiqiangZhou/BIRD/blob/master/R_script/get_DHS_cluster.r to obtain the clustering results of the DNase-seq data.
 
 #####Step 3:
-Use the R code in https://github.com/WeiqiangZhou/BIRD/blob/master/R_script/get_param.r to obtain the required files to build the BIRD model.
+Use the R code in https://github.com/WeiqiangZhou/BIRD/blob/master/R_script/get_model_data.r to obtain the required files to build the BIRD model.
 
 #####Step 4:
 Run the following command to compile the BIRD model file:
