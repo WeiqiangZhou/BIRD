@@ -133,16 +133,19 @@ int main(int argc, char *argv[])
 		DH_pre_idx3[j] = new int[DH_num3]();
 	}
 
-
+        //read in modle file
 	if (ReadinModel(libfile, quantile_in, exon_mean, exon_sd, coef, DNase_mean, DNase_sd, pre_idx, TC_id, cluster_idx, select_loci, predictor_size, var_size, loci_size, dis_matrix, DH_cluster, DH_coef1, DH_coef2, DH_coef3, DH_pre_idx1, DH_pre_idx2, DH_pre_idx3, DH_num1, DH_num2, DH_num3))
 	{
 		return 1;
 	}
+	//read in gene expression data
 	if (ReadinExon(infile, indata))
 	{
 		return 1;
 	}
 	std::cout << "Processing data..." << std::endl;
+	
+	//check gene expression data
 	if (CheckTCid(TC_id, exonin.TC_name,predictor_size))     //check if the input file contains the same predictor as library.
 	{
 		std::cout << "Exon array data format incorrect: Transcription cluster id is not the same as the library file." << std::endl;
@@ -179,8 +182,8 @@ int main(int argc, char *argv[])
 		
 	}
 
-	StandardizeRow(data_norm, exon_mean, exon_sd, predictor_size, sample_size);
-	ClusterMean(data_norm, data_mean, cluster_idx, predictor_size, cluster_size, sample_size); //get cluster mean;
+	StandardizeRow(data_norm, exon_mean, exon_sd, predictor_size, sample_size); //standardize gene expression data
+	ClusterMean(data_norm, data_mean, cluster_idx, predictor_size, cluster_size, sample_size); //get gene expression cluster mean;
 	
 	//Locus level prediction
 	Regression(data_mean, output, coef, pre_idx, var_size, loci_size, sample_size); 
@@ -193,8 +196,10 @@ int main(int argc, char *argv[])
 	//Combine result from locus level and DH cluster level
 	ModelAverage(output, DH_pre1, DH_pre2, DH_pre3, dis_matrix, DH_cluster, loci_size, sample_size);
 
+        //convert predicted value back to original scale
 	StandardizeRow_r(output, DNase_mean, DNase_sd, loci_size, sample_size);
 
+        //write output file
 	std::cout << "Writing output file..." << std::endl;
 	if (WriteWIG(output, select_loci, exonin.sample_name, outfile, bin_size, loci_size, sample_size, write_flag))
 	{
