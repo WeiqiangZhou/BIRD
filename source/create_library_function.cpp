@@ -1,5 +1,6 @@
 #include "create_library_header.h"
 
+//read in the parameter file
 int ReadParam(char *infile, int *parameter, char **filename)
 {
 	FILE * p_in;
@@ -167,6 +168,7 @@ int ReadParam(char *infile, int *parameter, char **filename)
 	return 0;
 }
 
+//read in a vector (double)
 int ReadVector_d(char *infile, double *data)
 {
 	FILE *p_in;
@@ -192,8 +194,7 @@ int ReadVector_d(char *infile, double *data)
 	return 0;
 }
 
-
-
+//read in a vector (int)
 int ReadVector_i(char *infile, int *data)
 {
 	FILE *p_in;
@@ -219,6 +220,7 @@ int ReadVector_i(char *infile, int *data)
 	return 0;
 }
 
+//read in a matrix (double)
 int ReadMatrix_d(char *file, double **data)
 {
 	std::ifstream infile(file);
@@ -255,6 +257,7 @@ int ReadMatrix_d(char *file, double **data)
 
 }
 
+//read in a matrix (int)
 int ReadMatrix_i(char *file, int **data)
 {
 	std::ifstream infile(file);
