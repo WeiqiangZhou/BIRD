@@ -10,7 +10,7 @@ data_out <- rep(0,nrow=length(ref_gene_id))
 
 for(i in 1:length(ref_gene_id)){
 if(length(which(input_gene_id==ref_gene_id[i]))==1){
-data_out[i] <- data_ave[which(input_gene_id==ref_gene_id[i]),"FPKM"]
+data_out[i] <- data_in[which(input_gene_id==ref_gene_id[i]),"FPKM"]
 }
 }
 
