@@ -148,8 +148,8 @@ int main(int argc, char *argv[])
 	//check gene expression data
 	if (CheckTCid(TC_id, exonin.TC_name,predictor_size))     //check if the input file contains the same predictor as library.
 	{
-		std::cout << "Exon array data format incorrect: Transcription cluster id is not the same as the library file." << std::endl;
-		std::cout << "Please check sample exon file for reference." << std::endl;
+		std::cout << "Gene expression data format incorrect: Gene id is not the same as the library file." << std::endl;
+		std::cout << "Please check sample input file for reference." << std::endl;
 		return 1;
 	}
 
