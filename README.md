@@ -84,9 +84,6 @@ bash path_to_BIRD/BIRD_bash.sh path_to_BIRD path_to_BIRD/example/Exon_K562_lab.t
 ```
 You should get four output files: K562_DNase.txt.part1, K562_DNase.txt.part2, K562_DNase.Duke.wig, K562_DNase.UW.wig
 
-####PDDB: Predicted DNase I hypersensitivity database
-A database of the predicted DNase I hypersensitivity for 2,000 GEO exon array samples is available at http://jilab.biostat.jhsph.edu/~bsherwo2/bird/index.php
-
 ####How to use (for RNA-seq)
 First, use **Tophat** and **Cufflinks** to obtain the gene expression (i.e. FPKM) for the input sample.
 
@@ -117,6 +114,12 @@ Change **path_to_BIRD** to the path where you install BIRD.
 
 Genomic information in the current version of BIRD is based on **human genome hg19**.
 
+####PDDB: Predicted DNase I hypersensitivity database
+A database of the predicted DNase I hypersensitivity for 2,000 GEO exon array samples is available at http://jilab.biostat.jhsph.edu/~bsherwo2/bird/index.php
+
 ####Contact
 Weiqiang Zhou: wzhou14@jhu.edu
 
+####References
+Zhou W, Sherwood B, Ji Z, Du F, Bai J, Ji H. 2016. Genome-wide Prediction of DNase I Hypersensitivity Using Gene Expression. bioRxiv doi: 10.1101/035808.
+Zhou W, Ji Z, Ji H. 2016. Global Prediction of Chromatin Accessibility Using RNA-seq from Small Number of Cells. bioRxiv doi: 10.1101/035816.
