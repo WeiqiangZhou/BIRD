@@ -84,6 +84,9 @@ bash path_to_BIRD/BIRD_bash.sh path_to_BIRD path_to_BIRD/example/Exon_K562_lab.t
 ```
 You should get four output files: K562_DNase.txt.part1, K562_DNase.txt.part2, K562_DNase.Duke.wig, K562_DNase.UW.wig
 
+####PDDB: Predicted DNase I hypersensitivity database
+A database of the predicted DNase I hypersensitivity for 2,000 GEO exon array samples is available at http://jilab.biostat.jhsph.edu/~bsherwo2/bird/index.php
+
 ####How to use (for RNA-seq)
 First, use **Tophat** and **Cufflinks** to obtain the gene expression (i.e. FPKM) for the input sample.
 
