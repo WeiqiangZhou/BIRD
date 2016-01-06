@@ -91,7 +91,7 @@ To download and install Tophat and Cufflinks, see https://ccb.jhu.edu/software/t
 
 How to use Tophat and Cufflinks, see https://github.com/WeiqiangZhou/BIRD/blob/master/RNAseq_instruction.md
 
-After obtaining the gene expression data **genes.fpkm_tracking**, used the bash script **match_gene.r** to prepare the input file for BIRD.
+After obtaining the gene expression data **genes.fpkm_tracking**, used the bash script **match_gene.sh** to prepare the input file for BIRD.
 ```
 bash path_to_BIRD/match_gene.sh genes.fpkm_tracking path_to_BIRD/model/ref_gene.txt genes.fpkm_tracking.match
 ```
