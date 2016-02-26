@@ -1,5 +1,5 @@
 ####How to build the prediction model
-To build the prediction model, you should have normalized and log2 transformed DNase-seq data and the quantile normalized gene expression data in hand.
+To build the prediction model, you should have normalized and log2 transformed DNase-seq data and the log2 transformed and quantile normalized gene expression data in hand.
 
 Example of the DNase-seq data:
 ```
