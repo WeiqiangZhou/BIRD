@@ -9,7 +9,7 @@ cel_files
 input_exon_array.CEL
 ```
 ####Run GeneBASE
-The Affymetrix tissue panel data is recommended to be combined with the user exon array data, which can be obtained from http://www.affymetrix.com/support/technical/sample_data/exon_array_data.affx
+The Affymetrix tissue panel data is recommended to be combined with the input exon array data, which can be obtained from http://www.affymetrix.com/support/technical/sample_data/exon_array_data.affx
 
 The required library files can be obtained from http://www.affymetrix.com/support/technical/byproduct.affx?product=huexon-st
 
