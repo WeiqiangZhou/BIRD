@@ -6,10 +6,7 @@ apt-cel-convert --format xda --cel-files input_file_list.txt -i
 Example of input_file_list.txt
 ```
 cel_files
-input_exon_array_1.CEL
-input_exon_array_2.CEL
-...
-input_exon_array_N.CEL
+input_exon_array.CEL
 ```
 ####Run GeneBASE
 The Affymetrix tissue panel data is recommended to be combined with the user exon array data, which can be obtained from http://www.affymetrix.com/support/technical/sample_data/exon_array_data.affx
@@ -34,7 +31,7 @@ cell_dim	2560
 
 [exon_data]
 folder	/CEL_file_directory/
-exon_cel_files	User_exon_array.CEL,huex_wta_breast_A.CEL,huex_wta_breast_B.CEL,huex_wta_breast_C.CEL,huex_wta_cerebellum_A.CEL,huex_wta_cerebellum_B.CEL,huex_wta_cerebellum_C.CEL,huex_wta_heart_A.CEL,huex_wta_heart_B.CEL,huex_wta_heart_C.CEL,huex_wta_kidney_A.CEL,huex_wta_kidney_B.CEL,huex_wta_kidney_C.CEL,huex_wta_liver_A.CEL,huex_wta_liver_B.CEL,huex_wta_liver_C.CEL,huex_wta_muscle_A.CEL,huex_wta_muscle_B.CEL,huex_wta_muscle_C.CEL,huex_wta_pancreas_A.CEL,huex_wta_pancreas_B.CEL,huex_wta_pancreas_C.CEL,huex_wta_prostate_A.CEL,huex_wta_prostate_B.CEL,huex_wta_prostate_C.CEL,huex_wta_spleen_A.CEL,huex_wta_spleen_B.CEL,huex_wta_spleen_C.CEL,huex_wta_testes_A.CEL,huex_wta_testes_B.CEL,huex_wta_testes_C.CEL,huex_wta_thyroid_A.CEL,huex_wta_thyroid_B.CEL,huex_wta_thyroid_C.CEL
+exon_cel_files	input_exon_array.CEL,huex_wta_breast_A.CEL,huex_wta_breast_B.CEL,huex_wta_breast_C.CEL,huex_wta_cerebellum_A.CEL,huex_wta_cerebellum_B.CEL,huex_wta_cerebellum_C.CEL,huex_wta_heart_A.CEL,huex_wta_heart_B.CEL,huex_wta_heart_C.CEL,huex_wta_kidney_A.CEL,huex_wta_kidney_B.CEL,huex_wta_kidney_C.CEL,huex_wta_liver_A.CEL,huex_wta_liver_B.CEL,huex_wta_liver_C.CEL,huex_wta_muscle_A.CEL,huex_wta_muscle_B.CEL,huex_wta_muscle_C.CEL,huex_wta_pancreas_A.CEL,huex_wta_pancreas_B.CEL,huex_wta_pancreas_C.CEL,huex_wta_prostate_A.CEL,huex_wta_prostate_B.CEL,huex_wta_prostate_C.CEL,huex_wta_spleen_A.CEL,huex_wta_spleen_B.CEL,huex_wta_spleen_C.CEL,huex_wta_testes_A.CEL,huex_wta_testes_B.CEL,huex_wta_testes_C.CEL,huex_wta_thyroid_A.CEL,huex_wta_thyroid_B.CEL,huex_wta_thyroid_C.CEL
 
 [output]
 output_model_fit	output_file.txt
