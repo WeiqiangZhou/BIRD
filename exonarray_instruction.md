@@ -6,7 +6,10 @@ apt-cel-convert --format xda --cel-files input_file_list.txt -i
 Example of input_file_list.txt
 ```
 cel_files
-user_exon_array.CEL
+input_exon_array_1.CEL
+input_exon_array_2.CEL
+...
+input_exon_array_N.CEL
 ```
 ####Run GeneBASE
 The Affymetrix tissue panel data is recommended to be combined with the user exon array data, which can be obtained from http://www.affymetrix.com/support/technical/sample_data/exon_array_data.affx
