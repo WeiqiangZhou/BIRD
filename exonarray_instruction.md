@@ -23,11 +23,11 @@ Example of PAR_file.txt
 logfile Log_file.txt
 
 [exon_annotation]
-probeset_annotation  HuEx-1_0-st-v2.na33.1.hg19.probeset.csv
-pgf_file  HuEx-1_0-st-v2.r2.pgf
-clf_file  HuEx-1_0-st-v2.r2.clf
-num_cells  6553600
-cell_dim  2560
+probeset_annotation	HuEx-1_0-st-v2.na33.1.hg19.probeset.csv
+pgf_file	HuEx-1_0-st-v2.r2.pgf
+clf_file	HuEx-1_0-st-v2.r2.clf
+num_cells	6553600
+cell_dim	2560
 
 [exon_data]
 folder	/CEL_file_directory/
