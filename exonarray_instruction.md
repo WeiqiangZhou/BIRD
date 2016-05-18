@@ -20,7 +20,7 @@ ProbeEffects -par PAR_file.txt
 Example of PAR_file.txt
 ```
 [log]
-logfile	Log_file.txt
+logfile Log_file.txt
 
 [exon_annotation]
 probeset_annotation	HuEx-1_0-st-v2.na33.1.hg19.probeset.csv
