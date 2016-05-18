@@ -18,6 +18,7 @@ To run GeneBASE:
 ProbeEffects -par PAR_file.txt
 ```
 Example of PAR_file.txt
+***Note that flags and parameter values are separated by tabs***
 ```
 [log]
 logfile Log_file.txt
