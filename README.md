@@ -117,6 +117,11 @@ Genomic information in the current version of BIRD is based on **human genome hg
 ####PDDB: Predicted DNase I hypersensitivity database
 A database of the predicted DNase I hypersensitivity for 2,000 GEO exon array samples is available at http://jilab.biostat.jhsph.edu/~bsherwo2/bird/index.php
 
+####Interpretation of the prediction models
+The predictor genes for each genomic locus and each DHS cluster, motif enrichment analysis results, GO analysis results, and the active cell types for each DHS cluster in the prediction models are provided as an online resource which is available at https://kenzhou.shinyapps.io/cabs.
+
+Users can input a list of interested genomic regions and explore the overlapped DHSs from the prediction models. 
+
 ####Contact
 Weiqiang Zhou: wzhou14@jhu.edu
 
