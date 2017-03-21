@@ -1,4 +1,4 @@
-####Convert CEL file format
+### Convert CEL file format
 The format of CEL files may need to be converted first using apt-cel-convert from Affymetrix Power Tools (APT) which can be obtained from http://www.affymetrix.com/estore/partners_programs/programs/developer/tools/powertools.affx#1_2
 ```
 apt-cel-convert --format xda --cel-files input_file_list.txt -i
@@ -8,7 +8,7 @@ Example of input_file_list.txt
 cel_files
 input_exon_array.CEL
 ```
-####Run GeneBASE
+### Run GeneBASE
 The training exon array data of BIRD is recommended to be combined with the input exon array data, which can be obtained from http://jilab.biostat.jhsph.edu/software/BIRD/Exon_panel/BIRD_57_exon_data.zip
 
 The required library files can be obtained from http://www.affymetrix.com/support/technical/byproduct.affx?product=huexon-st
