@@ -1,4 +1,4 @@
-####How to build the prediction model
+### How to build the prediction model
 To build the prediction model, you should have normalized and log2 transformed DNase-seq data and the log2 transformed and quantile normalized gene expression data in hand.
 
 Example of the DNase-seq data:
@@ -24,16 +24,16 @@ TranscriptCluster   AG04449   AG04450   AG10803      AoAF        BJ       Hac
 You should first install **BigKmeans** and **BIRD**. See https://github.com/fangdu64/BDT for details of how to install BigKmeans. See https://github.com/WeiqiangZhou/BIRD for details of how to install BIRD.
 
 Then, apply the following steps:
-#####Step 1:
+#### Step 1:
 Use the R code in https://github.com/WeiqiangZhou/BIRD/blob/master/R_script/get_param.r to obtain the optimal number of gene clusters K and number of predictors N.
 
-#####Step 2:
+#### Step 2:
 Use the R code in https://github.com/WeiqiangZhou/BIRD/blob/master/R_script/get_DHS_cluster.r to obtain the clustering results of the DNase-seq data.
 
-#####Step 3:
+#### Step 3:
 Use the R code in https://github.com/WeiqiangZhou/BIRD/blob/master/R_script/get_model_data.r to obtain the required files to build the BIRD model.
 
-#####Step 4:
+#### Step 4:
 Run the following command to compile the BIRD model file:
 ```
 BIRD_build_library -i par_file.txt -o model_file.bin
