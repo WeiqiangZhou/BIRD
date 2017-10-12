@@ -107,8 +107,14 @@ path_to_BIRD/BIRD_predict -b path_to_BIRD/model/RNAseq_model_file.bin -i genes.f
 ```
 
 ### For RNA-seq with FPKM data matrix
-If you have a data matrix containing the gene names and FPKM for multiple samples (see **FPKM_data_matrix.txt** in the **example** folder), use the R script **match_input_matrix.r** to prepare the input data for BIRD.
+If you have a data matrix containing the gene names and FPKM for multiple samples (see **FPKM_data_matrix.txt** in the **example** folder), use the R script **match_input_matrix.r** to prepare the input data before running BIRD prediction.
 
+For example:
+```
+Rscript --vanilla path_to_BIRD/R_script/match_input_matrix.r path_to_BIRD/model/ref_gene.txt FPKM_data_matrix.txt FPKM_data_matrix_match.txt
+
+path_to_BIRD/BIRD_predict -b path_to_BIRD/model/RNAseq_model_file.bin -i FPKM_data_matrix_match.txt -o output_file.txt
+```
 
 ### How to build the prediction model
 The BIRD software package contains the pre-built prediction model for both exon array and RNA-seq data. 
