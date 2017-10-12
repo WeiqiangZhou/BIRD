@@ -107,7 +107,7 @@ path_to_BIRD/BIRD_predict -b path_to_BIRD/model/RNAseq_model_file.bin -i genes.f
 ```
 
 ### For RNA-seq with FPKM data matrix
-If you have a data matrix containing the gene names and FPKM for multiple samples (see **FPKM_data_matrix.txt** in the **example** folder), use the R script **match_input_matrix.r** to prepare the input data before running BIRD prediction.
+If you have a data matrix containing the gene names and FPKM for multiple samples (see **FPKM_data_matrix.txt** in the **example** folder as an example), use the R script **match_input_matrix.r** to prepare the input data before running BIRD prediction.
 
 For example:
 ```
