@@ -137,6 +137,6 @@ Users can input a list of interested genomic regions and explore the overlapped 
 Weiqiang Zhou: wzhou14@jhu.edu
 
 ### References
-Zhou W, Sherwood B, Ji Z, Xue Y, Du F, Bai J, Ying M, Ji H. Genome-wide Prediction of DNase I Hypersensitivity Using Gene Expression. bioRxiv doi: 10.1101/035808. Nature Communications (2017). (In press)
+Zhou W, Sherwood B, Ji Z, Xue Y, Du F, Bai J, Ying M, Ji H. Genome-wide Prediction of DNase I Hypersensitivity Using Gene Expression. Nature Communications 8, 1038 (2017). ([open access](https://www.nature.com/articles/s41467-017-01188-x))
 
 Zhou W, Ji Z, Ji H. Global Prediction of Chromatin Accessibility Using RNA-seq from Small Number of Cells. bioRxiv doi: 10.1101/035816 (2016).
