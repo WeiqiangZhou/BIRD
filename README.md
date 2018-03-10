@@ -117,7 +117,10 @@ path_to_BIRD/BIRD_predict -b path_to_BIRD/model/RNAseq_model_file.bin -i FPKM_da
 ```
 
 ### How to build the prediction model
-The BIRD software package contains the pre-built prediction model for both exon array and RNA-seq data. 
+The BIRD software package contains the pre-built prediction model for both exon array and RNA-seq data.
+
+The training data for BIRD using DNase-seq and exon array is available in:
+https://github.com/WeiqiangZhou/BIRD-data
 
 If you would like to know how to build a prediction model, see https://github.com/WeiqiangZhou/BIRD/blob/master/build_prediction_model.md for details.
 ### Note:
