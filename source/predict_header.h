@@ -5,6 +5,7 @@
 #include <string.h>
 #include <math.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 struct Exondata
 {
@@ -25,5 +26,5 @@ int ReadinModel(char[255], double *, double *, double *, double **, double *, do
 int ReadPar(char[255], int &, int &, int &, int &, int &, int &, int &, int &);
 void Regression(double **, double **, double **, int **, int, int, int);
 void ModelAverage(double **, double **, double **, double **, double **, int **, int, int);
-int WriteWIG(double **, char **, std::vector<std::string>, char *, int, int, int, int);
+int WriteWIG(double **, char **, std::vector<std::string>, char *, int, int, int, int, double);
 void help_info();
