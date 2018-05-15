@@ -6,42 +6,72 @@ int main(int argc, char *argv[])
 	char outfile[255];
 	char libfile[255]="./model_file.bin";
 	int write_flag = 0;
+	int locus_model = 0;
+	double up_bound = 14;
+	int opt;
 
-	if (argc == 2 && strcmp(argv[1], "-h") == 0)
+	if(argc == 1)
 	{
 		help_info();
 		return 1;
 	}
-	else if (argc == 5 && strcmp(argv[1], "-i") == 0 && strcmp(argv[3], "-o") == 0 )
+
+	while ((opt = getopt(argc,argv,"b:i:o:u:whl")) != EOF)
 	{
-		strcpy(infile, argv[2]);
-		strcpy(outfile, argv[4]);
+		switch(opt)
+		{
+			case 'b':
+				strcpy(libfile, optarg);
+				break;
+			case 'i':
+				strcpy(infile, optarg);
+				break;
+			case 'o':
+				strcpy(outfile, optarg);
+				break;
+			case 'u':
+				up_bound = atof(optarg);
+				break;
+			case 'w':
+				write_flag = 1;
+				break;
+			case 'h':
+				help_info();
+				return 1;
+			case 'l':
+				locus_model = 1;
+				break;
+			case '?':
+				std::cout << "Please input the correct parameters." << std::endl;
+				std::cout << "Standard output: BIRD_predict -b model_file.bin -i input_file.txt -o output_file.txt" << std::endl;
+				std::cout << "WIG output: BIRD_predict -b model_file.bin -i input_file.txt -o output_name -w" << std::endl;
+				return 1;
+			default:
+				abort();
+		}
 	}
-	else if (argc == 6 && strcmp(argv[1], "-i") == 0 && strcmp(argv[3], "-o") == 0 && strcmp(argv[5], "-w") == 0)
+
+	//output parameters
+	std::cout << "Using model file: " << libfile << std::endl;
+	std::cout << "Input file name: " << infile << std::endl;
+	std::cout << "Output file name: " << outfile << std::endl;
+	std::cout << "Using upper bound: " << up_bound << std::endl;
+	if(write_flag)
 	{
-		strcpy(infile, argv[2]);
-		strcpy(outfile, argv[4]);
-		write_flag = 1;
-	}
-	else if (argc == 7 && strcmp(argv[1], "-b") == 0 && strcmp(argv[3], "-i") == 0 && strcmp(argv[5], "-o") == 0)
-	{
-		strcpy(libfile, argv[2]);
-		strcpy(infile, argv[4]);
-		strcpy(outfile, argv[6]);
-	}
-	else if (argc == 8 && strcmp(argv[1], "-b") == 0 && strcmp(argv[3], "-i") == 0 && strcmp(argv[5], "-o") == 0 && strcmp(argv[7], "-w") == 0)
-	{
-		strcpy(libfile, argv[2]);
-		strcpy(infile, argv[4]);
-		strcpy(outfile, argv[6]);
-		write_flag = 1;
+		std::cout << "Output mode: wig file" << std::endl;
 	}
 	else
 	{
-		std::cout << "Please input the correct parameters." << std::endl;
-		std::cout << "Standard output: BIRD_predict -b model_file.bin -i input_file.txt -o output_file.txt" << std::endl;
-		std::cout << "WIG output: BIRD_predict -b model_file.bin -i input_file.txt -o output_name -w" << std::endl;
-		return 1;
+		std::cout << "Output mode: data matrix" << std::endl;
+	}
+
+	if(locus_model)
+	{
+		std::cout << "Prediction mode: locus-level model" << std::endl;
+	}
+	else
+	{
+		std::cout << "Prediction mode: full model" << std::endl;
 	}
 
 	Exondata exonin;
@@ -133,7 +163,7 @@ int main(int argc, char *argv[])
 		DH_pre_idx3[j] = new int[DH_num3]();
 	}
 
-        //read in modle file
+	//read in modle file
 	if (ReadinModel(libfile, quantile_in, exon_mean, exon_sd, coef, DNase_mean, DNase_sd, pre_idx, TC_id, cluster_idx, select_loci, predictor_size, var_size, loci_size, dis_matrix, DH_cluster, DH_coef1, DH_coef2, DH_coef3, DH_pre_idx1, DH_pre_idx2, DH_pre_idx3, DH_num1, DH_num2, DH_num3))
 	{
 		return 1;
@@ -144,7 +174,7 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 	std::cout << "Processing data..." << std::endl;
-	
+
 	//check gene expression data
 	if (CheckTCid(TC_id, exonin.TC_name,predictor_size))     //check if the input file contains the same predictor as library.
 	{
@@ -179,29 +209,39 @@ int main(int argc, char *argv[])
 			data_norm[i][j] = log2(exonin.data[j][i] + 1);
 		}
 		QuantileNorm(data_norm[i], quantile_in, predictor_size);    //quantile normalization accroding to quantile from UW exon data.
-		
+
 	}
 
 	StandardizeRow(data_norm, exon_mean, exon_sd, predictor_size, sample_size); //standardize gene expression data
 	ClusterMean(data_norm, data_mean, cluster_idx, predictor_size, cluster_size, sample_size); //get gene expression cluster mean;
-	
-	//Locus level prediction
-	Regression(data_mean, output, coef, pre_idx, var_size, loci_size, sample_size); 
-	
-	//DH cluster level prediction
-	Regression(data_mean, DH_pre1, DH_coef1, DH_pre_idx1, var_size, DH_num1, sample_size);
-	Regression(data_mean, DH_pre2, DH_coef2, DH_pre_idx2, var_size, DH_num2, sample_size);
-	Regression(data_mean, DH_pre3, DH_coef3, DH_pre_idx3, var_size, DH_num3, sample_size);
 
-	//Combine result from locus level and DH cluster level
-	ModelAverage(output, DH_pre1, DH_pre2, DH_pre3, dis_matrix, DH_cluster, loci_size, sample_size);
+	if(locus_model != 1)
+	{
+		//Locus level prediction
+		Regression(data_mean, output, coef, pre_idx, var_size, loci_size, sample_size);
 
-        //convert predicted value back to original scale
+		//DH cluster level prediction
+		Regression(data_mean, DH_pre1, DH_coef1, DH_pre_idx1, var_size, DH_num1, sample_size);
+		Regression(data_mean, DH_pre2, DH_coef2, DH_pre_idx2, var_size, DH_num2, sample_size);
+		Regression(data_mean, DH_pre3, DH_coef3, DH_pre_idx3, var_size, DH_num3, sample_size);
+
+		//Combine result from locus level and DH cluster level
+		ModelAverage(output, DH_pre1, DH_pre2, DH_pre3, dis_matrix, DH_cluster, loci_size, sample_size);
+		std::cout << "Using full model for prediction." << std::endl;
+	}
+	else
+	{
+		//Locus level prediction
+		Regression(data_mean, output, coef, pre_idx, var_size, loci_size, sample_size);
+		std::cout << "Using locus-level model for prediction." << std::endl;
+	}
+
+  	//convert predicted value back to original scale
 	StandardizeRow_r(output, DNase_mean, DNase_sd, loci_size, sample_size);
 
-        //write output file
+  	//write output file
 	std::cout << "Writing output file..." << std::endl;
-	if (WriteWIG(output, select_loci, exonin.sample_name, outfile, bin_size, loci_size, sample_size, write_flag))
+	if (WriteWIG(output, select_loci, exonin.sample_name, outfile, bin_size, loci_size, sample_size, write_flag, up_bound))
 	{
 		return 1;
 	}
