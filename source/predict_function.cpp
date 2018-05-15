@@ -346,7 +346,7 @@ void ModelAverage(double **output, double **DH_pre1, double **DH_pre2, double **
 }
 
 //write ouput file in the format of data matrix or wig file
-int WriteWIG(double **data_out, char **select_idx, std::vector<std::string> outname, char *outfile, int bin_size, int loci_length, int sample_size, int flag)
+int WriteWIG(double **data_out, char **select_idx, std::vector<std::string> outname, char *outfile, int bin_size, int loci_length, int sample_size, int flag, double up_bound)
 {
 	char *part;
 	char temp_name[255];
@@ -372,9 +372,28 @@ int WriteWIG(double **data_out, char **select_idx, std::vector<std::string> outn
 				fprintf(pFile, "%s\t", select_idx[i]);
 				for (int j = 0; j < sample_size-1; j++)
 				{
-					fprintf(pFile, "%lf\t", data_out[j][i]);   //report original output value, log2(x+1) transformed.
+					value = data_out[j][i];
+					if (value < 0)
+					{
+						value = 0;
+					}
+					else if (value > up_bound)
+					{
+						value = up_bound;
+					}
+					fprintf(pFile, "%lf\t", value);   //report original output value, log2(x+1) transformed.
 				}
-				fprintf(pFile, "%lf\n", data_out[sample_size-1][i]);
+
+				value = data_out[sample_size-1][i];
+				if (value < 0)
+				{
+					value = 0;
+				}
+				else if (value > up_bound)
+				{
+					value = up_bound;
+				}
+				fprintf(pFile, "%lf\n", value);
 
 			}
 			fclose(pFile);
@@ -384,8 +403,8 @@ int WriteWIG(double **data_out, char **select_idx, std::vector<std::string> outn
 			std::cout << "Error! Cannot write file " << outfile << std::endl;
 			return 1;
 		}
-		
-	
+
+
 	}
 	else    //WIG output
 	{
@@ -444,9 +463,9 @@ int WriteWIG(double **data_out, char **select_idx, std::vector<std::string> outn
 						{
 							value = 0;
 						}
-						else if (value > 10000)
+						else if (value > pow(2,up_bound))
 						{
-							value = 10000;
+							value = pow(2,up_bound);
 						}
 						count++;
 						fprintf(pFile, "%d\t%lf\n", (*it), value);        //report value is limited from 0 to 10000.
@@ -461,12 +480,12 @@ int WriteWIG(double **data_out, char **select_idx, std::vector<std::string> outn
 					{
 						value = 0;
 					}
-					else if (value > 10000)
+					else if (value > pow(2,up_bound))
 					{
-						value = 10000;
+						value = pow(2,up_bound);
 					}
 					count++;
-					fprintf(pFile, "%d\t%lf\n", (*it), value);       
+					fprintf(pFile, "%d\t%lf\n", (*it), value);
 				}
 
 				fclose(pFile);
@@ -476,7 +495,7 @@ int WriteWIG(double **data_out, char **select_idx, std::vector<std::string> outn
 				std::cout << "Error! Cannot write file " << temp_name << std::endl;
 				return 1;
 			}
-	
+
 		}
 	}
 	return 0;
@@ -493,6 +512,8 @@ void help_info()
 	std::cout << "-b   Specify library file. If not sepecified,the program will search for model_file.bin in the current directory." << std::endl;
 	std::cout << "-i   Specify input file (gene expression obtained from GeneBASE)." << std::endl;
 	std::cout << "-o   Specify output file." << std::endl;
+	std::cout << "-u   Set upper bound for predicted values (default:14)." << std::endl;
 	std::cout << "-w   Output WIG file for each sample." << std::endl;
+	std::cout << "-l   Use locus-level model for prediction." << std::endl;
 	return;
 }
