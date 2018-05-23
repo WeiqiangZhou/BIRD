@@ -38,4 +38,4 @@ Run the following command to compile the BIRD model file:
 ```
 BIRD_build_library -i par_file.txt -o model_file.bin
 ```
-Now, you should get the prediction model file **model_file.bin**.
+Now, you should get the prediction model file **model_file.bin** and the reference gene name file **gene_name.txt**.
