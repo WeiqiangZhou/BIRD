@@ -60,15 +60,17 @@ path_to_BIRD/BIRD_predict -h
 ```
 ```
 Usage:                                                                                                      
-Standard output: BIRD_predict -b model_file.bin -i input_file.txt -o output_file.txt                        
-Standard output will save a matrix contained all predited value in log scale (log2(x+1) transformed).       
-WIG output: BIRD_predict -b model_file.bin -i input_file.txt -o output_name -w                              
-WIG output will save each sample as a WIG file.                                                             
-Options:                                                                                                    
--b   Specify library file. If not sepecified,the program will use model_file.bin in the current directory.  
--i   Specify input file (gene expression obtained from GeneBASE).                                           
--o   Specify output file.                                                                                   
--w   Output WIG file for each sample.                                                                       
+Standard output: BIRD_predict -b model_file.bin -i input_file.txt -o output_file.txt
+Standard output will save a matrix contained all predited value in log scale (log2(x+1) transformed).
+WIG output: BIRD_predict -b model_file.bin -i input_file.txt -o output_name -w
+WIG output will save each sample as a WIG file.
+Options:
+-b   Specify library file. If not sepecified,the program will search for model_file.bin in the current directory.
+-i   Specify input file (gene expression obtained from GeneBASE).
+-o   Specify output file.
+-u   Set upper bound for predicted values (default:14).
+-w   Output WIG file for each sample.
+-l   Use locus-level model for prediction.                                                                 
 ```
 ### For large dataset
 It could be memory intensive to run BIRD on dataset with sample size larger than 100 (memory usage > 1G). In such cases, it is recommended to run BIRD via the bash script **BIRD_bash.sh**. It is required that **R** is installed and make sure the **Rscript** command is executable. The bash script will partition the input file into N files according to partition_size (e.g. 100, the number of samples in a partitioned input file). 
