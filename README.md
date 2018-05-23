@@ -19,7 +19,9 @@ Options:
 ```
 Specifically, the predicted values are now bounded from 0 to 14. Users can use the -u option to change the upper bound when using their own prediction model. Users can also use -l option to perform prediction using the locus-level model rather than using the full model. This is useful when you build your own prediction model but you are not sure if the cluster-level model works or not.
 
-To be consistent, **ref_gene.txt** file is renamed as **gene_name.txt**.
+To be consistent with the users' own prediction model, the reference gene name file **ref_gene.txt** is renamed as **gene_name.txt**. Please use the **gene_name.txt** file to prepare the input gene expression matrix for RNA-seq. 
+
+**Prebuilt prediction model for RNA-seq with more genomic loci is released in https://github.com/WeiqiangZhou/BIRD-model**
 
 ### Installation
 Currently, BIRD supports Linux/Unix system. Download the latest version of BIRD from: 
