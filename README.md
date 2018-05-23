@@ -7,7 +7,7 @@ BIRD is a software to predict DNase I hypersensitivity (DNase-seq signal) based 
 **The training data for BIRD using DNase-seq and exon array is now available in:
 https://github.com/WeiqiangZhou/BIRD-data**
 
-**BIRD is updated to provide more options in the prediction function**
+**BIRD is updated to v1.0.4 which provides more options in the prediction function**
 ```
 Options:
 -b   Specify library file. If not sepecified,the program will search for model_file.bin in the current directory.
