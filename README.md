@@ -18,6 +18,7 @@ Options:
 -l   Use locus-level model for prediction.
 ```
 Specifically, the predicted values are now bounded from 0 to 14. Users can use the -u option to change the upper bound when using their own prediction model. Users can also use -l option to perform prediction using the locus-level model rather than using the full model. This is useful when you build your own prediction model but you are not sure if the cluster-level model works or not.
+
 To be consistent, ref_gene.txt file is renamed as gene_name.txt.
 
 ### Installation
