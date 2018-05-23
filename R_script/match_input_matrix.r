@@ -1,5 +1,5 @@
 ##match the gene order in a data matrix
-##Usage: Rscript --vanilla match_input_matrix.r PATH_TO_BIRD/model/ref_gene.txt input_file.txt output_file.txt
+##Usage: Rscript --vanilla match_input_matrix.r PATH_TO_BIRD/model/gene_name.txt input_file.txt output_file.txt
 
 args = commandArgs(trailingOnly=TRUE)
 
