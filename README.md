@@ -18,6 +18,7 @@ Options:
 -l   Use locus-level model for prediction.
 ```
 Specifically, the predicted values are now bounded from 0 to 14. Users can use the -u option to change the upper bound when using their own prediction model. Users can also use -l option to perform prediction using the locus-level model rather than using the full model. This is useful when you build your own prediction model but you are not sure if the cluster-level model works or not.
+To be consistent, ref_gene.txt file is renamed as gene_name.txt.
 
 ### Installation
 Currently, BIRD supports Linux/Unix system. Download the latest version of BIRD from: 
@@ -109,7 +110,7 @@ How to use Tophat and Cufflinks, see https://github.com/WeiqiangZhou/BIRD/blob/m
 
 After obtaining the gene expression data **genes.fpkm_tracking**, used the bash script **match_gene.sh** to prepare the input file for BIRD.
 ```
-bash path_to_BIRD/match_gene.sh genes.fpkm_tracking path_to_BIRD/model/ref_gene.txt genes.fpkm_tracking.match
+bash path_to_BIRD/match_gene.sh genes.fpkm_tracking path_to_BIRD/model/gene_name.txt genes.fpkm_tracking.match
 ```
 Then run the **BIRD_predict** program for prediction (use model file **RNAseq_model_file.bin**):
 
@@ -127,7 +128,7 @@ If you have a data matrix containing the gene names and FPKM for multiple sample
 
 For example:
 ```
-Rscript --vanilla path_to_BIRD/R_script/match_input_matrix.r path_to_BIRD/model/ref_gene.txt FPKM_data_matrix.txt FPKM_data_matrix_match.txt
+Rscript --vanilla path_to_BIRD/R_script/match_input_matrix.r path_to_BIRD/model/gene_name.txt FPKM_data_matrix.txt FPKM_data_matrix_match.txt
 
 path_to_BIRD/BIRD_predict -b path_to_BIRD/model/RNAseq_model_file.bin -i FPKM_data_matrix_match.txt -o output_file.txt
 ```
