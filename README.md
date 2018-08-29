@@ -4,9 +4,11 @@
 BIRD is a software to predict DNase I hypersensitivity (DNase-seq signal) based on gene expression data (support both human exon array and RNA-seq data). Using a pre-built model and input gene expression data, BIRD is capable to predict DNase-seq signal genome-wide (~1M genomic loci). BIRD provided two types of outputs: (1) data matrix format or (2) WIG format. Users can easily visualize the predicted DNase-seq signals in UCSC genome browser. 
 
 ### News
-**1. Prebuilt prediction model for RNA-seq with more genomic loci is released in https://github.com/WeiqiangZhou/BIRD-model**
+**08/29/2018:**
 
-**2. BIRD is updated to v1.1 which provides more options in the prediction function**
+**Prebuilt prediction model for RNA-seq with more genomic loci is released in https://github.com/WeiqiangZhou/BIRD-model**
+
+**BIRD is updated to v1.1.1 which provides more options in the prediction function**
 ```
 Options:
 -b   Specify library file. If not sepecified,the program will search for model_file.bin in the current directory.
@@ -15,16 +17,15 @@ Options:
 -u   Set upper bound for predicted values (default:14).
 -w   Output WIG file for each sample.
 -l   Use locus-level model for prediction.
+-e   Use exact id match for matching the gene expression data.
 ```
 Specifically, the predicted values are now bounded from 0 to 14. Users can use the -u option to change the upper bound when using their own prediction model. Users can also use -l option to perform prediction using the locus-level model rather than using the full model. This is useful when you build your own prediction model but you are not sure if the cluster-level model works or not.
 
 To be consistent with the users' own prediction model, the reference gene name file **ref_gene.txt** is renamed as **gene_name.txt**. Please use the **gene_name.txt** file to prepare the input gene expression matrix for RNA-seq. 
 
-**3. The training data for BIRD using DNase-seq and exon array is now available in:
-https://github.com/WeiqiangZhou/BIRD-data**
-
 ### Installation
 Currently, BIRD supports Linux/Unix and macOS system. 
+
 First, download and install the latest version of BIRD: 
 
 ```
@@ -91,6 +92,8 @@ Options:
 ```
 
 ### How to use (for exon array)
+**The training data for BIRD using DNase-seq and exon array is now available in:
+https://github.com/WeiqiangZhou/BIRD-data**
 BIRD accepts gene expression output file from **GeneBASE** (see **Exon_K562_lab.txt** in the **example** folder for reference).
 If you have the raw exon array data (CEL file), use GeneBASE to get the gene expression. 
 
