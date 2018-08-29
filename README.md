@@ -148,6 +148,8 @@ If you would like to know how to build a prediction model, see https://github.co
 ### Note:
 Change **path_to_BIRD** to the path where you install BIRD.
 
+Chagne **path_to_model** to the path where you store the prebuilt models.
+
 Genomic information in the current version of BIRD is based on **human genome hg19**.
 
 ### PDDB: Predicted DNase I hypersensitivity database
