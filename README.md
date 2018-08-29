@@ -9,19 +9,8 @@ BIRD is a software to predict DNase I hypersensitivity (DNase-seq signal) based 
 **Prebuilt prediction model for RNA-seq with more genomic loci is released in https://github.com/WeiqiangZhou/BIRD-model**
 
 **BIRD is updated to v1.1.1 which provides more options in the prediction function**
-```
-Options:
--b   Specify library file. If not sepecified,the program will search for model_file.bin in the current directory.
--i   Specify input file (gene expression obtained from GeneBASE).
--o   Specify output file.
--u   Set upper bound for predicted values (default:14).
--w   Output WIG file for each sample.
--l   Use locus-level model for prediction.
--e   Use exact id match for matching the gene expression data.
-```
-Specifically, the predicted values are now bounded from 0 to 14. Users can use the -u option to change the upper bound when using their own prediction model. Users can also use -l option to perform prediction using the locus-level model rather than using the full model. This is useful when you build your own prediction model but you are not sure if the cluster-level model works or not.
 
-To be consistent with the users' own prediction model, the reference gene name file **ref_gene.txt** is renamed as **gene_name.txt**. Please use the **gene_name.txt** file to prepare the input gene expression matrix for RNA-seq. 
+Specifically, the predicted values are now bounded from 0 to 14. Users can use the -u option to change the upper bound when using their own prediction model. Users can also use -l option to perform prediction using the locus-level model rather than using the full model. This is useful when you build your own prediction model but you are not sure if the cluster-level model works or not.
 
 ### Installation
 Currently, BIRD supports Linux/Unix and macOS system. 
@@ -92,9 +81,6 @@ Options:
 ```
 
 ### How to use (for exon array)
-**The training data for BIRD using DNase-seq and exon array is now available in:
-https://github.com/WeiqiangZhou/BIRD-data**
-
 BIRD accepts gene expression output file from **GeneBASE** (see **Exon_K562_lab.txt** in the **example** folder for reference).
 If you have the raw exon array data (CEL file), use GeneBASE to get the gene expression. 
 
@@ -154,10 +140,8 @@ How to use Tophat and Cufflinks, see https://github.com/WeiqiangZhou/BIRD/blob/m
 The most updated pipeline make use of **HISAT2** and **StringTie**. see https://ccb.jhu.edu/software/hisat2/index.shtml and https://ccb.jhu.edu/software/stringtie/
 
 ### How to build the prediction model
-The BIRD software package contains the pre-built prediction model for both exon array and RNA-seq data.
-
-The training data for BIRD using DNase-seq and exon array is now available in:
-https://github.com/WeiqiangZhou/BIRD-data
+**The training data for BIRD using DNase-seq and exon array is now available in:
+https://github.com/WeiqiangZhou/BIRD-data**
 
 If you would like to know how to build a prediction model, see https://github.com/WeiqiangZhou/BIRD/blob/master/build_prediction_model.md for details.
 
