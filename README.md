@@ -32,6 +32,41 @@ unzip BIRD_v1.1.zip
 cd BIRD_v1.1
 make
 ```
+
+### How to use (for RNA-seq and single-cell RNA-seq)
+Prepare a data matrix with the gene ensembl ids as the first column and expression values for multiple samples as other columns (see **FPKM_data_matrix.txt** in the **example** folder as an example).
+
+To get data matrix format output, run:
+```
+path_to_BIRD/BIRD_predict -b path_to_model/RNAseq_model_file.bin -i FPKM_data_matrix.txt -o output_file.txt
+```
+BIRD will first match the ensembl id of the genes used for building the prebuilt model with the ids in the input data matrix. The matched data matrix will be outputted as input_file.match.txt (e.g., _FPKM_data_matrix.txt.match.txt_). By default, the version section of the id. For example, given an ensembl id ENSG00000227232.4, only ENSG00000227232 will be used for matching. Users can specify the -e flag to perform an extract match (e.g., ENSG00000227232.4 will be used for matching).
+
+To get WIG format output, run:
+```
+path_to_BIRD/BIRD_predict -b path_to_model/RNAseq_model_file.bin -i FPKM_data_matrix.txt -o output_name -w
+```
+
+For help information, run:
+```
+path_to_BIRD/BIRD_predict -h
+```
+```
+Usage:                                                                                                      
+Standard output: BIRD_predict -b model_file.bin -i input_file.txt -o output_file.txt
+Standard output will save a matrix contained all predited value in log scale (log2(x+1) transformed).
+WIG output: BIRD_predict -b model_file.bin -i input_file.txt -o output_name -w
+WIG output will save each sample as a WIG file.
+Options:
+-b   Specify library file. If not sepecified,the program will search for model_file.bin in the current directory.
+-i   Specify input file (gene expression obtained from GeneBASE).
+-o   Specify output file.
+-u   Set upper bound for predicted values (default:14).
+-w   Output WIG file for each sample.
+-l   Use locus-level model for prediction.  
+-e   Use exact id match for matching the gene expression data.
+```
+
 ### How to use (for exon array)
 BIRD accepts gene expression output file from **GeneBASE**.
 If you have the raw exon array data (CEL file), use GeneBASE to get the gene expression. 
@@ -56,24 +91,7 @@ WIG file can be visualized in UCSC genome browser by adding custom tracks:
 
 http://genome.ucsc.edu/cgi-bin/hgGateway
 
-For help information, run:
-```
-path_to_BIRD/BIRD_predict -h
-```
-```
-Usage:                                                                                                      
-Standard output: BIRD_predict -b model_file.bin -i input_file.txt -o output_file.txt
-Standard output will save a matrix contained all predited value in log scale (log2(x+1) transformed).
-WIG output: BIRD_predict -b model_file.bin -i input_file.txt -o output_name -w
-WIG output will save each sample as a WIG file.
-Options:
--b   Specify library file. If not sepecified,the program will search for model_file.bin in the current directory.
--i   Specify input file (gene expression obtained from GeneBASE).
--o   Specify output file.
--u   Set upper bound for predicted values (default:14).
--w   Output WIG file for each sample.
--l   Use locus-level model for prediction.                                                                 
-```
+
 ### For large dataset
 It could be memory intensive to run BIRD on dataset with sample size larger than 100 (memory usage > 1G). In such cases, it is recommended to run BIRD via the bash script **BIRD_bash.sh**. It is required that **R** is installed and make sure the **Rscript** command is executable. The bash script will partition the input file into N files according to partition_size (e.g. 100, the number of samples in a partitioned input file). 
 
