@@ -34,7 +34,7 @@ make
 ```
 
 ### How to use (for RNA-seq and single-cell RNA-seq)
-Prepare a data matrix with the gene ensembl ids as the first column and expression values for multiple samples as other columns (see **FPKM_data_matrix.txt** in the **example** folder as an example).
+Prepare a data matrix with the gene ensembl ids as the first column and expression values for multiple samples as other columns (see **FPKM_data_matrix.txt** in the **example** folder for reference).
 
 To get data matrix format output, run:
 ```
