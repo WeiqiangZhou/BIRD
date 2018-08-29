@@ -125,7 +125,6 @@ bash path_to_BIRD/BIRD_bash.sh path_to_BIRD path_to_model/RNAseq_model_file.bin 
 ```
 bash path_to_BIRD/BIRD_bash.sh path_to_BIRD path_to_model/RNAseq_model_file.bin path_to_BIRD/example/FPKM_data_matrix.txt GM12878_DNase 1 1
 ```
-You should get four output files: K562_DNase.txt.part1, K562_DNase.txt.part2, K562_DNase.Duke.wig, K562_DNase.UW.wig
 
 ### How to get gene expression from RNA-seq
 Use **Tophat** and **Cufflinks** to obtain the gene expression (i.e. FPKM) for the input sample.
