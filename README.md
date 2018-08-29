@@ -24,13 +24,27 @@ To be consistent with the users' own prediction model, the reference gene name f
 https://github.com/WeiqiangZhou/BIRD-data**
 
 ### Installation
-Currently, BIRD supports Linux/Unix system. Download the latest version of BIRD from: 
+Currently, BIRD supports Linux/Unix and macOS system. 
+First, download and install the latest version of BIRD: 
 
-https://github.com/WeiqiangZhou/BIRD/releases/download/v1.1/BIRD_v1.1.zip
 ```
-unzip BIRD_v1.1.zip
-cd BIRD_v1.1
+wget https://github.com/WeiqiangZhou/BIRD/releases/download/v1.1.1/BIRD_v1.1.1.zip
+unzip BIRD_v1.1.1.zip
+cd BIRD_v1.1.1
 make
+```
+
+Second, download the required prediction models (see https://github.com/WeiqiangZhou/BIRD-model):
+For RNA-seq data:
+```
+wget https://github.com/WeiqiangZhou/BIRD-model/releases/download/v1.2/RNAseq_model_file.bin.zip
+unzip RNAseq_model_file.bin.zip
+```
+
+For exon array data:
+```
+wget https://github.com/WeiqiangZhou/BIRD-model/releases/download/v1.1/Exonarray_model_file.bin.zip
+unzip RNAseq_model_file.bin.zip
 ```
 
 ### How to use (for RNA-seq and single-cell RNA-seq)
