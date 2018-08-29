@@ -4,11 +4,14 @@ int main(int argc, char *argv[])
 {
 	char infile[255];
 	char outfile[255];
+    char outfile_expr[255];
 	char libfile[255]="./model_file.bin";
 	int write_flag = 0;
 	int locus_model = 0;
 	double up_bound = 14;
 	int opt;
+    int match_mode = 0;
+    std::string sep_str = ".";
 
 	if(argc == 1)
 	{
@@ -16,7 +19,7 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
-	while ((opt = getopt(argc,argv,"b:i:o:u:whl")) != EOF)
+	while ((opt = getopt(argc,argv,"b:i:o:u:whle")) != EOF)
 	{
 		switch(opt)
 		{
@@ -41,6 +44,9 @@ int main(int argc, char *argv[])
 			case 'l':
 				locus_model = 1;
 				break;
+            case 'e':
+                match_mode = 1;
+                break;
 			case '?':
 				std::cout << "Please input the correct parameters." << std::endl;
 				std::cout << "Standard output: BIRD_predict -b model_file.bin -i input_file.txt -o output_file.txt" << std::endl;
@@ -173,16 +179,34 @@ int main(int argc, char *argv[])
 	{
 		return 1;
 	}
-	std::cout << "Processing data..." << std::endl;
 
-	//check gene expression data
-	if (CheckTCid(TC_id, exonin.TC_name,predictor_size))     //check if the input file contains the same predictor as library.
-	{
-		std::cout << "Gene expression data format incorrect: Gene id is not the same as the library file." << std::endl;
-		std::cout << "Please check sample input file for reference." << std::endl;
-		return 1;
-	}
-
+    int *match_idx = new int[predictor_size];
+    
+    //match and check gene expression data
+    std::cout << "Matching the input gene expression data." << std::endl;
+    if(match_mode == 1)
+    {
+        //use exact match
+        if (MatchExon(TC_id, indata, predictor_size, match_idx))
+        {
+            std::cout << "Gene expression data format incorrect: No gene id matches the library file." << std::endl;
+            std::cout << "Please check sample input file for reference." << std::endl;
+            return 1;
+        }
+    }
+    else
+    {
+        //match id before separate character
+        if (MatchExon_sep(TC_id, indata, predictor_size, match_idx, sep_str))
+        {
+            std::cout << "Gene expression data format incorrect: No gene id matches the library file." << std::endl;
+            std::cout << "Please check sample input file for reference." << std::endl;
+            return 1;
+        }
+    }
+    
+    std::cout << "Processing data..." << std::endl;
+    
 	sample_size = (int)exonin.sample_name.size();
 
 	double ** data_norm = new double *[sample_size];
@@ -206,11 +230,25 @@ int main(int argc, char *argv[])
 	{
 		for (int j = 0; j < predictor_size; j++)
 		{
-			data_norm[i][j] = log2(exonin.data[j][i] + 1);
+            if(match_idx[j] != -1)
+            {
+                data_norm[i][j] = log2(exonin.data[match_idx[j]][i] + 1);
+            }
+            else
+            {
+                data_norm[i][j] = 0;
+            }
 		}
-		QuantileNorm(data_norm[i], quantile_in, predictor_size);    //quantile normalization accroding to quantile from UW exon data.
-
 	}
+    
+    strcpy(outfile_expr, infile);
+    strcat(outfile_expr, ".match.txt");
+    WriteExpr(data_norm, exonin.sample_name, TC_id, outfile_expr, predictor_size, sample_size);
+    
+    for (int i = 0; i < sample_size; i++)
+    {
+        QuantileNorm(data_norm[i], quantile_in, predictor_size);
+    }
 
 	StandardizeRow(data_norm, exon_mean, exon_sd, predictor_size, sample_size); //standardize gene expression data
 	ClusterMean(data_norm, data_mean, cluster_idx, predictor_size, cluster_size, sample_size); //get gene expression cluster mean;

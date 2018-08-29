@@ -6,6 +6,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <unordered_map>
 
 struct Exondata
 {
@@ -16,8 +17,12 @@ struct Exondata
 
 void ReleaseExondata(Exondata);
 int CheckTCid(char **, std::vector<std::string>, int);
+int MatchExon_sep(char **, Exondata *, int, int *, std::string);
+int MatchExon(char **, Exondata *, int, int *);
 int ReadinExon(char [255], Exondata *);
+int WriteExpr(double **, std::vector<std::string>, char **, char *, int, int);
 void ShellSort(double *, int *, int);
+void GetRank(double *, double *,int);
 void QuantileNorm(double *, double *, int);
 void StandardizeRow(double **, double *, double *, int, int);
 void StandardizeRow_r(double **, double *, double *, int, int);

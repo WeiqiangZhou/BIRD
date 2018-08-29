@@ -63,92 +63,92 @@ int ReadParam(char *infile, int *parameter, char **filename)
 			}
 			else if (strcmp(par_name, "GeneQuantile") == 0)
 			{
-				fscanf(p_in, "%s", &temp_char);
+				fscanf(p_in, "%s", temp_char);
 				strcpy(filename[0], temp_char);
 			}
 			else if (strcmp(par_name, "GeneMean") == 0)
 			{
-				fscanf(p_in, "%s", &temp_char);
+				fscanf(p_in, "%s", temp_char);
 				strcpy(filename[1], temp_char);
 			}
 			else if (strcmp(par_name, "GeneSD") == 0)
 			{
-				fscanf(p_in, "%s", &temp_char);
+				fscanf(p_in, "%s", temp_char);
 				strcpy(filename[2], temp_char);
 			}
 			else if (strcmp(par_name, "ClusterIndex") == 0)
 			{
-				fscanf(p_in, "%s", &temp_char);
+				fscanf(p_in, "%s", temp_char);
 				strcpy(filename[3], temp_char);
 			}
 			else if (strcmp(par_name, "DNaseMean") == 0)
 			{
-				fscanf(p_in, "%s", &temp_char);
+				fscanf(p_in, "%s", temp_char);
 				strcpy(filename[4], temp_char);
 			}
 			else if (strcmp(par_name, "DNaseSD") == 0)
 			{
-				fscanf(p_in, "%s", &temp_char);
+				fscanf(p_in, "%s", temp_char);
 				strcpy(filename[5], temp_char);
 			}
 			else if (strcmp(par_name, "RegressionCoef") == 0)
 			{
-				fscanf(p_in, "%s", &temp_char);
+				fscanf(p_in, "%s", temp_char);
 				strcpy(filename[6], temp_char);
 			}
 			else if (strcmp(par_name, "RegressionPredictor") == 0)
 			{
-				fscanf(p_in, "%s", &temp_char);
+				fscanf(p_in, "%s", temp_char);
 				strcpy(filename[7], temp_char);
 			}
 			else if (strcmp(par_name, "GenomicLoci") == 0)
 			{
-				fscanf(p_in, "%s", &temp_char);
+				fscanf(p_in, "%s", temp_char);
 				strcpy(filename[8], temp_char);
 			}
 			else if (strcmp(par_name, "GeneName") == 0)
 			{
-				fscanf(p_in, "%s", &temp_char);
+				fscanf(p_in, "%s", temp_char);
 				strcpy(filename[9], temp_char);
 			}
 			else if (strcmp(par_name, "DistanceMatrix") == 0)
 			{
-				fscanf(p_in, "%s", &temp_char);
+				fscanf(p_in, "%s", temp_char);
 				strcpy(filename[10], temp_char);
 			}
 			else if (strcmp(par_name, "DHCluster") == 0)
 			{
-				fscanf(p_in, "%s", &temp_char);
+				fscanf(p_in, "%s", temp_char);
 				strcpy(filename[11], temp_char);
 			}
 			else if (strcmp(par_name, "DHClusterCoef1") == 0)
 			{
-				fscanf(p_in, "%s", &temp_char);
+				fscanf(p_in, "%s", temp_char);
 				strcpy(filename[12], temp_char);
 			}
 			else if (strcmp(par_name, "DHClusterCoef2") == 0)
 			{
-				fscanf(p_in, "%s", &temp_char);
+				fscanf(p_in, "%s", temp_char);
 				strcpy(filename[13], temp_char);
 			}
 			else if (strcmp(par_name, "DHClusterCoef3") == 0)
 			{
-				fscanf(p_in, "%s", &temp_char);
+				fscanf(p_in, "%s", temp_char);
 				strcpy(filename[14], temp_char);
 			}
 			else if (strcmp(par_name, "DHClusterPredictor1") == 0)
 			{
-				fscanf(p_in, "%s", &temp_char);
+				fscanf(p_in, "%s", temp_char);
 				strcpy(filename[15], temp_char);
 			}
 			else if (strcmp(par_name, "DHClusterPredictor2") == 0)
 			{
-				fscanf(p_in, "%s", &temp_char);
+				fscanf(p_in, "%s", temp_char);
 				strcpy(filename[16], temp_char);
 			}
 			else if (strcmp(par_name, "DHClusterPredictor3") == 0)
 			{
-				fscanf(p_in, "%s", &temp_char);
+				fscanf(p_in, "%s", temp_char);
 				strcpy(filename[17], temp_char);
 			}
 			else

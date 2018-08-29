@@ -21,6 +21,130 @@ int CheckTCid(char **lib_TC, std::vector<std::string> in_TC, int Length)
 	return 0;
 }
 
+
+//match input data with separate character
+int MatchExon_sep(char **lib_TC, Exondata *indata, int Length, int *match_idx, std::string sep_str)
+{
+    int error_flag = 1;
+    std::string id_str;
+    std::size_t sep_pos;
+    std::string temp_id;
+    std::unordered_map<std::string, int> id_map;
+    
+    for (int i = 0; i < indata->TC_name.size(); i++)
+    {
+        id_str = indata->TC_name[i].c_str();
+        sep_pos = id_str.find(sep_str);
+        temp_id = id_str.substr(0, sep_pos);
+        id_map[temp_id] = i+1;
+    }
+    
+    for (int i = 0; i < Length; i++)
+    {
+        id_str = lib_TC[i];
+        sep_pos = id_str.find(sep_str);
+        temp_id = id_str.substr(0, sep_pos);
+        
+        match_idx[i] = id_map[temp_id] - 1;
+    }
+    
+    for (int i = 0; i < Length; i++)
+    {
+        if(match_idx[i] != -1)
+        {
+            error_flag = 0;
+            break;
+        }
+    }
+    
+    if(error_flag == 1)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+
+//match data with extract match
+int MatchExon(char **lib_TC, Exondata *indata, int Length, int *match_idx)
+{
+    int error_flag = 1;
+    std::unordered_map<std::string, int> id_map;
+    
+    for (int i = 0; i < indata->TC_name.size(); i++)
+    {
+        id_map[indata->TC_name[i].c_str()] = i+1;
+    }
+    
+    for (int i = 0; i < Length; i++)
+    {
+        match_idx[i] = id_map[lib_TC[i]] - 1;
+    }
+    
+    for (int i = 0; i < Length; i++)
+    {
+        if(match_idx[i] != -1)
+        {
+            error_flag = 0;
+            break;
+        }
+    }
+    
+    if(error_flag == 1)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+
+//write matched gene expression data matrix
+int WriteExpr(double **data_out, std::vector<std::string> outname, char **lib_TC, char *outfile, int Length, int sample_size)
+{
+    FILE * pFile;
+    
+    pFile = fopen(outfile, "w");
+    if (pFile != NULL)
+    {
+        fprintf(pFile, "%s\t", "gene_id");
+        
+        for (int i = 0; i < sample_size-1; i++)
+        {
+            fprintf(pFile, "%s\t", outname[i].c_str());
+        }
+        
+        fprintf(pFile, "%s\n", outname[sample_size-1].c_str());
+        
+        for (int i = 0; i < Length; i++)
+        {
+            fprintf(pFile, "%s\t", lib_TC[i]);
+            
+            for (int j = 0; j < sample_size-1; j++)
+            {
+                fprintf(pFile, "%lf\t", pow(2, data_out[j][i]) - 1);
+            }
+            
+            fprintf(pFile, "%lf\n", pow(2, data_out[sample_size-1][i]) - 1);
+            
+        }
+        fclose(pFile);
+    }
+    else
+    {
+        std::cout << "Error! Cannot write file " << outfile << std::endl;
+        return 1;
+    }
+
+    return 0;
+}
+
+
 //read in gene expression data
 int ReadinExon(char filename[255], Exondata *indata)  
 {
@@ -102,12 +226,41 @@ void ShellSort(double *num, int *index, int numLength)
 	return;
 }
 
+//get ranking of the sorted data
+void GetRank(double *rank, double *num,int numLength)
+{
+    int i,j,k;
+    i = 0;
+    while (i < numLength)
+    {
+        j = i;
+        while ((j < numLength - 1) && (num[j]  == num[j + 1]))
+        {
+            j++;
+        }
+        if (i != j)
+        {
+            for (k = i; k <= j; k++)
+            {
+                rank[k] = (i + j + 2) / 2.0;
+            }
+        }
+        else
+        {
+            rank[i] = i + 1;
+        }
+        i = j + 1;
+    }
+    return;
+}
+
 //quantile normalizaiton with a vector of known quantile
 void QuantileNorm(double *indata, double *quantile, int dataLength) 
 {
 	int *index = new int[dataLength];
 	double *indata_copy = new double[dataLength];
-	int j;
+    double *ranks = new double[dataLength];
+
 	for (int i = 0; i < dataLength; i++)
 	{
 		index[i] = i;
@@ -115,22 +268,22 @@ void QuantileNorm(double *indata, double *quantile, int dataLength)
 	}
 
 	ShellSort(indata_copy, index, dataLength);
-	indata[index[0]] = quantile[0];
-	j = 0;
-	for (int i = 1; i < dataLength; i++)
+    GetRank(ranks, indata_copy, dataLength);
+    
+	for (int i = 0; i < dataLength; i++)
 	{
-		if (indata_copy[i] == indata_copy[i - 1])
-		{
-			indata[index[i]] = quantile[j];
-		}
-		else
-		{
-			j++;
-			indata[index[i]] = quantile[j];
-		}
+        if (ranks[i] - floor(ranks[i]) > 0.4)
+        {
+            indata[index[i]] = 0.5 * (quantile[(size_t)floor(ranks[i])-1] + quantile[(size_t)floor(ranks[i])]);
+        }
+        else
+        {
+            indata[index[i]] = quantile[(size_t)floor(ranks[i])-1];
+        }
 	}
 
 	delete[] index;
+    delete[] ranks;
 	delete[] indata_copy;
 	return;
 }
@@ -515,5 +668,6 @@ void help_info()
 	std::cout << "-u   Set upper bound for predicted values (default:14)." << std::endl;
 	std::cout << "-w   Output WIG file for each sample." << std::endl;
 	std::cout << "-l   Use locus-level model for prediction." << std::endl;
+    std::cout << "-e   Use exact id match for matching the gene expression data." << std::endl;
 	return;
 }
