@@ -45,7 +45,7 @@ unzip RNAseq_model_file.bin.zip
 For exon array data:
 ```
 wget https://github.com/WeiqiangZhou/BIRD-model/releases/download/v1.1/Exonarray_model_file.bin.zip
-unzip RNAseq_model_file.bin.zip
+unzip Exonarray_model_file.bin.zip
 ```
 
 ### How to use (for RNA-seq and single-cell RNA-seq)
@@ -94,6 +94,7 @@ Options:
 ### How to use (for exon array)
 **The training data for BIRD using DNase-seq and exon array is now available in:
 https://github.com/WeiqiangZhou/BIRD-data**
+
 BIRD accepts gene expression output file from **GeneBASE** (see **Exon_K562_lab.txt** in the **example** folder for reference).
 If you have the raw exon array data (CEL file), use GeneBASE to get the gene expression. 
 
