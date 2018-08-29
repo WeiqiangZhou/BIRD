@@ -40,12 +40,21 @@ To get data matrix format output, run:
 ```
 path_to_BIRD/BIRD_predict -b path_to_model/RNAseq_model_file.bin -i FPKM_data_matrix.txt -o output_file.txt
 ```
-BIRD will first match the ensembl id of the genes used for building the prebuilt model with the ids in the input data matrix. The matched data matrix will be outputted as input_file.match.txt (e.g., _FPKM_data_matrix.txt.match.txt_). By default, the version section of the id. For example, given an ensembl id ENSG00000227232.4, only ENSG00000227232 will be used for matching. Users can specify the -e flag to perform an extract match (e.g., ENSG00000227232.4 will be used for matching).
+BIRD will first match the ensembl id of the genes used for building the prebuilt model with the ids in the input data matrix. The matched data matrix will be outputted as input_file.match.txt (e.g., _FPKM_data_matrix.txt.match.txt_). By default, the version section of the id will be ignored. For example, given an ensembl id ENSG00000227232.4, only ENSG00000227232 will be used for matching. Users can specify the -e flag to perform an extract match (e.g., ENSG00000227232.4 will be used for matching).
 
 To get WIG format output, run:
 ```
 path_to_BIRD/BIRD_predict -b path_to_model/RNAseq_model_file.bin -i FPKM_data_matrix.txt -o output_name -w
 ```
+In this mode, BIRD will generate WIG file for each sample with prefix "output_name." followed by the column name in the input_file.txt.
+
+WIG file can be visualized in UCSC genome browser by adding custom tracks:
+
+http://genome.ucsc.edu/cgi-bin/hgGateway
+
+Or in IGV:
+
+http://software.broadinstitute.org/software/igv/
 
 For help information, run:
 ```
@@ -68,7 +77,7 @@ Options:
 ```
 
 ### How to use (for exon array)
-BIRD accepts gene expression output file from **GeneBASE**.
+BIRD accepts gene expression output file from **GeneBASE** (see **Exon_K562_lab.txt** in the **example** folder for reference).
 If you have the raw exon array data (CEL file), use GeneBASE to get the gene expression. 
 
 To download and install GeneBASE, see http://web.stanford.edu/group/wonglab/GeneBASE/
@@ -85,7 +94,6 @@ To get WIG format output, run:
 ```
 path_to_BIRD/BIRD_predict -b path_to_BIRD/model/model_file.bin -i input_file.txt -o output_name -w
 ```
-In this mode, BIRD will generate WIG file for each sample with prefix "output_name." followed by the column name in the input_file.txt.
 
 WIG file can be visualized in UCSC genome browser by adding custom tracks:
 
