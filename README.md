@@ -34,7 +34,7 @@ make
 ```
 
 ### How to use (for RNA-seq and single-cell RNA-seq)
-Prepare a data matrix with the gene ensembl ids as the first column and expression values for multiple samples as other columns (see **FPKM_data_matrix.txt** in the **example** folder for reference).
+Prepare a data matrix with the gene ensembl ids as the first column and expression values for each sample as other columns (see **FPKM_data_matrix.txt** in the **example** folder for reference).
 
 To get data matrix format output, run:
 ```
@@ -88,81 +88,53 @@ After running GeneBASE, you will get the gene expression data file (e.g. input_f
 
 To get data matrix format output, run:
 ```
-path_to_BIRD/BIRD_predict -b path_to_BIRD/model/model_file.bin -i input_file.txt -o output_file.txt
+path_to_BIRD/BIRD_predict -b path_to_model/Exonarry_model_file.bin -i input_file.txt -o output_file.txt
 ```
 To get WIG format output, run:
 ```
-path_to_BIRD/BIRD_predict -b path_to_BIRD/model/model_file.bin -i input_file.txt -o output_name -w
+path_to_BIRD/BIRD_predict -b path_to_model/Exonarry_model_file.bin -i input_file.txt -o output_name -w
 ```
-
-WIG file can be visualized in UCSC genome browser by adding custom tracks:
-
-http://genome.ucsc.edu/cgi-bin/hgGateway
-
 
 ### For large dataset
 It could be memory intensive to run BIRD on dataset with sample size larger than 100 (memory usage > 1G). In such cases, it is recommended to run BIRD via the bash script **BIRD_bash.sh**. It is required that **R** is installed and make sure the **Rscript** command is executable. The bash script will partition the input file into N files according to partition_size (e.g. 100, the number of samples in a partitioned input file). 
 
 To get data matrix format output, run:
 ```
-bash path_to_BIRD/BIRD_bash.sh path_to_BIRD input_file.txt output_name partition_size 0
+bash path_to_BIRD/BIRD_bash.sh path_to_BIRD path_to_model/RNAseq_model_file.bin input_file.txt output_name partition_size 0
 ```
 The output files should be **output_name.part1, ..., output_name.partN**.
 
 To get WIG format output, run:
 ```
-bash path_to_BIRD/BIRD_bash.sh path_to_BIRD input_file.txt output_name partition_size 1
+bash path_to_BIRD/BIRD_bash.sh path_to_BIRD path_to_model/RNAseq_model_file.bin input_file.txt output_name partition_size 1
 ```
+
 ### Example
 Run BIRD:
 ```
-path_to_BIRD/BIRD_predict -b path_to_BIRD/model/model_file.bin -i path_to_BIRD/example/Exon_K562_lab.txt -o K562_DNase.txt
+path_to_BIRD/BIRD_predict -b path_to_model/RNAseq_model_file.bin -i path_to_BIRD/example/FPKM_data_matrix.txt -o GM12878_DNase.txt
 ```
 ```
-path_to_BIRD/BIRD_predict -b path_to_BIRD/model/model_file.bin -i path_to_BIRD/example/Exon_K562_lab.txt -o K562_DNase -w
+path_to_BIRD/BIRD_predict -b path_to_model/RNAseq_model_file.bin -i path_to_BIRD/example/FPKM_data_matrix.txt -o GM12878_DNase -w
 ```
-You should get three output files: K562_DNase.txt, K562_DNase.Duke.wig, K562_DNase.UW.wig
 
 Run BIRD_bash.sh:
 ```
-bash path_to_BIRD/BIRD_bash.sh path_to_BIRD path_to_BIRD/example/Exon_K562_lab.txt K562_DNase.txt 1 0
+bash path_to_BIRD/BIRD_bash.sh path_to_BIRD path_to_model/RNAseq_model_file.bin path_to_BIRD/example/FPKM_data_matrix.txt GM12878_DNase.txt 1 0
 ```
 ```
-bash path_to_BIRD/BIRD_bash.sh path_to_BIRD path_to_BIRD/example/Exon_K562_lab.txt K562_DNase 1 1
+bash path_to_BIRD/BIRD_bash.sh path_to_BIRD path_to_model/RNAseq_model_file.bin path_to_BIRD/example/FPKM_data_matrix.txt GM12878_DNase 1 1
 ```
 You should get four output files: K562_DNase.txt.part1, K562_DNase.txt.part2, K562_DNase.Duke.wig, K562_DNase.UW.wig
 
-### How to use (for RNA-seq)
-First, use **Tophat** and **Cufflinks** to obtain the gene expression (i.e. FPKM) for the input sample.
+### How to get gene expression from RNA-seq
+Use **Tophat** and **Cufflinks** to obtain the gene expression (i.e. FPKM) for the input sample.
 
 To download and install Tophat and Cufflinks, see https://ccb.jhu.edu/software/tophat/tutorial.shtml and http://cole-trapnell-lab.github.io/cufflinks/getting_started/
 
 How to use Tophat and Cufflinks, see https://github.com/WeiqiangZhou/BIRD/blob/master/RNAseq_instruction.md
 
-After obtaining the gene expression data **genes.fpkm_tracking**, used the bash script **match_gene.sh** to prepare the input file for BIRD.
-```
-bash path_to_BIRD/match_gene.sh genes.fpkm_tracking path_to_BIRD/model/gene_name.txt genes.fpkm_tracking.match
-```
-Then run the **BIRD_predict** program for prediction (use model file **RNAseq_model_file.bin**):
-
-To get data matrix format output:
-```
-path_to_BIRD/BIRD_predict -b path_to_BIRD/model/RNAseq_model_file.bin -i genes.fpkm_tracking.match -o output_file.txt
-```
-To get WIG format output, run:
-```
-path_to_BIRD/BIRD_predict -b path_to_BIRD/model/RNAseq_model_file.bin -i genes.fpkm_tracking.match -o output_name -w
-```
-
-### For RNA-seq with FPKM data matrix
-If you have a data matrix containing the gene names and FPKM for multiple samples (see **FPKM_data_matrix.txt** in the **example** folder as an example), use the R script **match_input_matrix.r** to prepare the input data before running BIRD prediction.
-
-For example:
-```
-Rscript --vanilla path_to_BIRD/R_script/match_input_matrix.r path_to_BIRD/model/gene_name.txt FPKM_data_matrix.txt FPKM_data_matrix_match.txt
-
-path_to_BIRD/BIRD_predict -b path_to_BIRD/model/RNAseq_model_file.bin -i FPKM_data_matrix_match.txt -o output_file.txt
-```
+The most updated pipeline make use of **HISAT2** and **StringTie**. see https://ccb.jhu.edu/software/hisat2/index.shtml and https://ccb.jhu.edu/software/stringtie/
 
 ### How to build the prediction model
 The BIRD software package contains the pre-built prediction model for both exon array and RNA-seq data.
@@ -171,6 +143,7 @@ The training data for BIRD using DNase-seq and exon array is now available in:
 https://github.com/WeiqiangZhou/BIRD-data
 
 If you would like to know how to build a prediction model, see https://github.com/WeiqiangZhou/BIRD/blob/master/build_prediction_model.md for details.
+
 ### Note:
 Change **path_to_BIRD** to the path where you install BIRD.
 
