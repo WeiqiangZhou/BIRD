@@ -25,7 +25,7 @@ First, download and install the latest version of BIRD:
 
 Direct download from https://github.com/WeiqiangZhou/BIRD/releases/download/v1.1.1/BIRD_v1.1.1.zip
 
-Or use wget:
+Or:
 ```
 wget https://github.com/WeiqiangZhou/BIRD/releases/download/v1.1.1/BIRD_v1.1.1.zip
 ```
@@ -41,7 +41,7 @@ For RNA-seq data:
 
 Direct download from https://github.com/WeiqiangZhou/BIRD-model/releases/download/v1.2/RNAseq_model_file.bin.zip
 
-Or use wget:
+Or:
 ```
 wget https://github.com/WeiqiangZhou/BIRD-model/releases/download/v1.2/RNAseq_model_file.bin.zip
 ```
@@ -53,7 +53,7 @@ For exon array data:
 
 Direct download from https://github.com/WeiqiangZhou/BIRD-model/releases/download/v1.1/Exonarray_model_file.bin.zip
 
-Or use wget:
+Or:
 ```
 wget https://github.com/WeiqiangZhou/BIRD-model/releases/download/v1.1/Exonarray_model_file.bin.zip
 ```
