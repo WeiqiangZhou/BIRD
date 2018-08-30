@@ -39,7 +39,6 @@ Second, download and unzip the required prediction models (see https://github.co
 For RNA-seq data:
 
 Direct download from https://github.com/WeiqiangZhou/BIRD-model/releases/download/v1.2/RNAseq_model_file.bin.zip
-
 or run:
 ```
 wget https://github.com/WeiqiangZhou/BIRD-model/releases/download/v1.2/RNAseq_model_file.bin.zip
@@ -51,7 +50,6 @@ unzip RNAseq_model_file.bin.zip
 For exon array data:
 
 Direct download from https://github.com/WeiqiangZhou/BIRD-model/releases/download/v1.1/Exonarray_model_file.bin.zip
-
 or run:
 ```
 wget https://github.com/WeiqiangZhou/BIRD-model/releases/download/v1.1/Exonarray_model_file.bin.zip
