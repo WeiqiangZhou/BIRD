@@ -23,9 +23,9 @@ Currently, BIRD supports Linux/Unix and macOS system.
 
 First, download and install the latest version of BIRD:
 
-Direct download from https://github.com/WeiqiangZhou/BIRD/releases/download/v1.1.1/BIRD_v1.1.1.zip
+Direct download from https://github.com/WeiqiangZhou/BIRD/releases/download/v1.1.1/BIRD_v1.1.1.zip 
 
-Or:
+or run:
 ```
 wget https://github.com/WeiqiangZhou/BIRD/releases/download/v1.1.1/BIRD_v1.1.1.zip
 ```
@@ -35,13 +35,13 @@ cd BIRD_v1.1.1
 make
 ```
 
-Second, download the required prediction models (see https://github.com/WeiqiangZhou/BIRD-model):
+Second, download and unzip the required prediction models (see https://github.com/WeiqiangZhou/BIRD-model):
 
 For RNA-seq data:
 
 Direct download from https://github.com/WeiqiangZhou/BIRD-model/releases/download/v1.2/RNAseq_model_file.bin.zip
 
-Or:
+or run:
 ```
 wget https://github.com/WeiqiangZhou/BIRD-model/releases/download/v1.2/RNAseq_model_file.bin.zip
 ```
@@ -53,7 +53,7 @@ For exon array data:
 
 Direct download from https://github.com/WeiqiangZhou/BIRD-model/releases/download/v1.1/Exonarray_model_file.bin.zip
 
-Or:
+or run:
 ```
 wget https://github.com/WeiqiangZhou/BIRD-model/releases/download/v1.1/Exonarray_model_file.bin.zip
 ```
