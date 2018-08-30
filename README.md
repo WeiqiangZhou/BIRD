@@ -31,6 +31,7 @@ make
 ```
 
 Second, download the required prediction models (see https://github.com/WeiqiangZhou/BIRD-model):
+
 For RNA-seq data:
 ```
 wget https://github.com/WeiqiangZhou/BIRD-model/releases/download/v1.2/RNAseq_model_file.bin.zip
