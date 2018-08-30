@@ -21,10 +21,15 @@ Starting from this version, the prebuilt prediction models will not be included 
 ### Installation
 Currently, BIRD supports Linux/Unix and macOS system. 
 
-First, download and install the latest version of BIRD: 
+First, download and install the latest version of BIRD:
 
+Direct from: https://github.com/WeiqiangZhou/BIRD/releases/download/v1.1.1/BIRD_v1.1.1.zip
+
+Or use wget:
 ```
 wget https://github.com/WeiqiangZhou/BIRD/releases/download/v1.1.1/BIRD_v1.1.1.zip
+```
+```
 unzip BIRD_v1.1.1.zip
 cd BIRD_v1.1.1
 make
