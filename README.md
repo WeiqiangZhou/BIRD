@@ -131,7 +131,7 @@ path_to_BIRD/BIRD_predict -b path_to_model/RNAseq_model_file.bin -i path_to_BIRD
 
 Run BIRD_bash.sh:
 ```
-bash path_to_BIRD/BIRD_bash.sh path_to_BIRD path_to_model/RNAseq_model_file.bin path_to_BIRD/example/FPKM_data_matrix.txt GM12878_DNase.txt 1 0
+bash path_to_BIRD/BIRD_bash.sh path_to_BIRD path_to_model/RNAseq_model_file.bin path_to_BIRD/example/FPKM_data_matrix.txt GM12878_DNase 1 0
 ```
 ```
 bash path_to_BIRD/BIRD_bash.sh path_to_BIRD path_to_model/RNAseq_model_file.bin path_to_BIRD/example/FPKM_data_matrix.txt GM12878_DNase 1 1
