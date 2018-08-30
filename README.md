@@ -24,7 +24,6 @@ Currently, BIRD supports Linux/Unix and macOS system.
 First, download and install the latest version of BIRD:
 
 Direct download from https://github.com/WeiqiangZhou/BIRD/releases/download/v1.1.1/BIRD_v1.1.1.zip 
-
 or run:
 ```
 wget https://github.com/WeiqiangZhou/BIRD/releases/download/v1.1.1/BIRD_v1.1.1.zip
