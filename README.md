@@ -7,12 +7,14 @@ BIRD is a software to predict DNase I hypersensitivity (DNase-seq signal) based 
 **08/29/2018:**
 
 **BIRD is updated to v1.1.1**
-Starting from this version, the prebuilt prediction models will not be included in this repo. Users can download the required model from https://github.com/WeiqiangZhou/BIRD-model.
+
+Starting from this version, the prebuilt prediction models will not be included in this repo. Users can download the required models from https://github.com/WeiqiangZhou/BIRD-model.
 
 **Important updates:**
+
 1. The quantile normalization function is updated to a more robust version.
 
-2. Input data  matching (gene id matching) is built in the BIRD program. Users don't need to prepare the input data matrix with the R script. Please read the **How to use (for RNA-seq and single-cell RNA-seq)** section for details.
+2. Input data  matching (gene id matching) is now included in the BIRD_predict program. Users don't have to prepare the input data matrix with the legacy R script _match_input_matrix.r_. Please read the **How to use (for RNA-seq and single-cell RNA-seq)** section for details.
 
 3. The predicted values are now bounded from 0 to 14. Users can use the -u option to change the upper bound when using their own prediction model. Users can also use -l option to perform prediction using the locus-level model rather than using the full model. This is useful when you build your own prediction model but you are not sure if the cluster-level model works or not.
 
