@@ -113,7 +113,7 @@ To get data matrix format output, run:
 ```
 bash path_to_BIRD/BIRD_bash.sh path_to_BIRD path_to_model/RNAseq_model_file.bin input_file.txt output_name partition_size 0
 ```
-The output files should be **output_name.part1, ..., output_name.partN**.
+The output files should be **output_name_part1.txt, ..., output_name_partN.txt**.
 
 To get WIG format output, run:
 ```
@@ -144,7 +144,7 @@ To download and install Tophat and Cufflinks, see https://ccb.jhu.edu/software/t
 
 How to use Tophat and Cufflinks, see https://github.com/WeiqiangZhou/BIRD/blob/master/RNAseq_instruction.md
 
-The most updated pipeline make use of **HISAT2** and **StringTie**. see https://ccb.jhu.edu/software/hisat2/index.shtml and https://ccb.jhu.edu/software/stringtie/
+The most updated software to process RNA-seq data are **HISAT2** and **StringTie**. see https://ccb.jhu.edu/software/hisat2/index.shtml and https://ccb.jhu.edu/software/stringtie/
 
 ### How to build the prediction model
 **The training data for BIRD using DNase-seq and exon array is now available in:
