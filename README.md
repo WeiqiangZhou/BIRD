@@ -12,7 +12,7 @@ Starting from this version, the prebuilt prediction models will not be included 
 
 **Important updates:**
 
-1. The quantile normalization function is updated to a more robust version.
+1. The quantile normalization function is updated to a more robust version (signfigantly boost prediction performance when there is a large number of tied values in the input data, e.g., single-cell RNA-seq data).
 
 2. Input data  matching (gene id matching) is now included in the BIRD_predict program. Users don't have to prepare the input data matrix with the legacy R script _match_input_matrix.r_. Please read the **How to use (for RNA-seq and single-cell RNA-seq)** section for details.
 
