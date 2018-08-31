@@ -12,9 +12,9 @@ Starting from this version, the prebuilt prediction models will not be included 
 
 **Important updates:**
 
-**1. The quantile normalization function is updated to a more robust version (signfigantly boost prediction performance when there is a large number of tied values in the input data, e.g., single-cell RNA-seq data).**
+1. The quantile normalization function is updated to a more robust version (signfigantly boost prediction performance when there is a large number of tied values in the input data, e.g., single-cell RNA-seq data).
 
-**2. Input data  matching (gene id matching) is now included in the BIRD_predict program. Users don't have to prepare the input data matrix with the legacy R script _match_input_matrix.r_. Please read the _How to use (for RNA-seq and single-cell RNA-seq)_ section for details.**
+2. Input data  matching (gene id matching) is now included in the BIRD_predict program. Users don't have to prepare the input data matrix with the legacy R script _match_input_matrix.r_. Please read the **How to use (for RNA-seq and single-cell RNA-seq)** section for details.
 
 3. The predicted values are now bounded from 0 to 14. Users can use the -u option to change the upper bound when using their own prediction model. Users can also use -l option to perform prediction using the locus-level model rather than using the full model. This is useful when you build your own prediction model but you are not sure if the cluster-level model works or not.
 
