@@ -6,7 +6,7 @@ BIRD is a software to predict DNase I hypersensitivity (DNase-seq signal) based 
 ### News
 **04/15/2019:**
 
-**new RNA-seq prediction model**
+**New RNA-seq prediction model**
 
 A new RNA-seq prediction model trained by 167 ENCODE samples is released in https://github.com/WeiqiangZhou/BIRD-model. We suggest users use this most up-to-date model for RNA-seq and single-cell RNA-seq data.
 
