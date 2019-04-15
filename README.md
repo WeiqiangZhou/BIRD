@@ -4,6 +4,12 @@
 BIRD is a software to predict DNase I hypersensitivity (DNase-seq signal) based on gene expression data (support both human exon array and RNA-seq data). Using a pre-built model and input gene expression data, BIRD is capable to predict DNase-seq signal genome-wide (~1M genomic loci). BIRD provided two types of outputs: (1) data matrix format or (2) WIG format. Users can easily visualize the predicted DNase-seq signals in UCSC genome browser. 
 
 ### News
+**04/15/2019:**
+
+**new RNA-seq prediction model**
+
+A new RNA-seq prediction model trained by 167 ENCODE samples is released in https://github.com/WeiqiangZhou/BIRD-model. We suggest users use this most up-to-date model for RNA-seq and single-cell RNA-seq data.
+
 **08/29/2018:**
 
 **BIRD is updated to v1.1.1**
@@ -38,13 +44,13 @@ Second, download and unzip the required prediction models (see https://github.co
 
 For RNA-seq data:
 
-Direct download from https://github.com/WeiqiangZhou/BIRD-model/releases/download/v1.2/RNAseq_model_file.bin.zip
+Direct download from https://github.com/WeiqiangZhou/BIRD-model/releases/download/v1.3/human_hg19_model.bin.zip
 or run:
 ```
-wget https://github.com/WeiqiangZhou/BIRD-model/releases/download/v1.2/RNAseq_model_file.bin.zip
+wget https://github.com/WeiqiangZhou/BIRD-model/releases/download/v1.3/human_hg19_model.bin.zip
 ```
 ```
-unzip RNAseq_model_file.bin.zip
+unzip human_hg19_model.bin.zip
 ```
 
 For exon array data:
@@ -63,13 +69,13 @@ Prepare a data matrix with the gene ensembl ids as the first column and expressi
 
 To get data matrix format output, run:
 ```
-path_to_BIRD/BIRD_predict -b path_to_model/RNAseq_model_file.bin -i FPKM_data_matrix.txt -o output_file.txt
+path_to_BIRD/BIRD_predict -b path_to_model/human_hg19_model.bin -i FPKM_data_matrix.txt -o output_file.txt
 ```
 BIRD will first match the ensembl id of the genes used for building the prediction model with the ids in the input data matrix. The matched data matrix will be outputted as input_file.match.txt (e.g., _FPKM_data_matrix.txt.match.txt_). By default, the version section of the ensembl id will be ignored. For example, given an ensembl id ENSG00000227232.4, only ENSG00000227232 will be used for matching. Users can specify the -e flag to perform an exact match (e.g., ENSG00000227232.4 will be used for matching).
 
 To get WIG format output, run:
 ```
-path_to_BIRD/BIRD_predict -b path_to_model/RNAseq_model_file.bin -i FPKM_data_matrix.txt -o output_name -w
+path_to_BIRD/BIRD_predict -b path_to_model/human_hg19_model.bin -i FPKM_data_matrix.txt -o output_name -w
 ```
 In this mode, BIRD will generate WIG file for each sample with prefix "output_name." followed by the column name in the input_file.txt.
 
@@ -125,30 +131,30 @@ It could be memory intensive to run BIRD on dataset with sample size larger than
 
 To get data matrix format output, run:
 ```
-bash path_to_BIRD/BIRD_bash.sh path_to_BIRD path_to_model/RNAseq_model_file.bin input_file.txt output_name partition_size 0
+bash path_to_BIRD/BIRD_bash.sh path_to_BIRD path_to_model/human_hg19_model.bin input_file.txt output_name partition_size 0
 ```
 The output files should be **output_name_part1.txt, ..., output_name_partN.txt**.
 
 To get WIG format output, run:
 ```
-bash path_to_BIRD/BIRD_bash.sh path_to_BIRD path_to_model/RNAseq_model_file.bin input_file.txt output_name partition_size 1
+bash path_to_BIRD/BIRD_bash.sh path_to_BIRD path_to_model/human_hg19_model.bin input_file.txt output_name partition_size 1
 ```
 
 ### Example
 Run BIRD:
 ```
-path_to_BIRD/BIRD_predict -b path_to_model/RNAseq_model_file.bin -i path_to_BIRD/example/FPKM_data_matrix.txt -o GM12878_DNase.txt
+path_to_BIRD/BIRD_predict -b path_to_model/human_hg19_model.bin -i path_to_BIRD/example/FPKM_data_matrix.txt -o GM12878_DNase.txt
 ```
 ```
-path_to_BIRD/BIRD_predict -b path_to_model/RNAseq_model_file.bin -i path_to_BIRD/example/FPKM_data_matrix.txt -o GM12878_DNase -w
+path_to_BIRD/BIRD_predict -b path_to_model/human_hg19_model.bin -i path_to_BIRD/example/FPKM_data_matrix.txt -o GM12878_DNase -w
 ```
 
 Run BIRD_bash.sh:
 ```
-bash path_to_BIRD/BIRD_bash.sh path_to_BIRD path_to_model/RNAseq_model_file.bin path_to_BIRD/example/FPKM_data_matrix.txt GM12878_DNase 1 0
+bash path_to_BIRD/BIRD_bash.sh path_to_BIRD path_to_model/human_hg19_model.bin path_to_BIRD/example/FPKM_data_matrix.txt GM12878_DNase 1 0
 ```
 ```
-bash path_to_BIRD/BIRD_bash.sh path_to_BIRD path_to_model/RNAseq_model_file.bin path_to_BIRD/example/FPKM_data_matrix.txt GM12878_DNase 1 1
+bash path_to_BIRD/BIRD_bash.sh path_to_BIRD path_to_model/human_hg19_model.bin path_to_BIRD/example/FPKM_data_matrix.txt GM12878_DNase 1 1
 ```
 
 ### How to get gene expression from RNA-seq
