@@ -167,7 +167,7 @@ How to use Tophat and Cufflinks, see https://github.com/WeiqiangZhou/BIRD/blob/m
 The most updated software to process RNA-seq data are **HISAT2** and **StringTie**. see https://ccb.jhu.edu/software/hisat2/index.shtml and https://ccb.jhu.edu/software/stringtie/
 
 ### How to build the prediction model
-**The training data for BIRD using DNase-seq and exon array is now available in:
+**The training data for all pre-built BIRD models are available in:
 https://github.com/WeiqiangZhou/BIRD-data**
 
 If you would like to know how to build a prediction model, see https://github.com/WeiqiangZhou/BIRD/blob/master/build_prediction_model.md for details.
