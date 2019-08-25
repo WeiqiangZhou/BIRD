@@ -10,6 +10,7 @@ BIRD is a software to predict DNase I hypersensitivity (DNase-seq signal) based 
 **Application of BIRD using single-cell RNA-seq data**
 
 Our latest paper about applying BIRD prediction using single-cell RNA-seq data is online in _Nucleic Acids Research_ :
+
 Zhou W, Ji Z, Fang W, Ji H. Global prediction of chromatin accessibility using small-cell-number and single-cell RNA-seq. _Nucleic Acids Research_, gkz716 (2019). ([open access](https://doi.org/10.1093/nar/gkz716))
 
 **07/18/2019:**
