@@ -6,6 +6,7 @@ BIRD is a software to predict DNase I hypersensitivity (DNase-seq signal) based 
 ### News
 
 **03/26/2020:**
+
 An option (-wt) is added to output wig files with log-transformed values.
 
 **08/25/2019:**
