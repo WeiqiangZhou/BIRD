@@ -499,7 +499,7 @@ void ModelAverage(double **output, double **DH_pre1, double **DH_pre2, double **
 }
 
 //write ouput file in the format of data matrix or wig file
-int WriteWIG(double **data_out, char **select_idx, std::vector<std::string> outname, char *outfile, int bin_size, int loci_length, int sample_size, int flag, double up_bound)
+int WriteWIG(double **data_out, char **select_idx, std::vector<std::string> outname, char *outfile, int bin_size, int loci_length, int sample_size, int flag, double up_bound, int flag_log)
 {
 	char *part;
 	char temp_name[255];
@@ -592,64 +592,128 @@ int WriteWIG(double **data_out, char **select_idx, std::vector<std::string> outn
 				}
 			}
 		}
+        
+        if (flag_log != 1)
+        {
+            for (int i = 0; i < sample_size; i++)
+            {
+                count = 0;
+                strcpy(temp_name, outfile);
+                strcat(temp_name, ".");
+                strcat(temp_name, outname[i].c_str());
+                strcat(temp_name, ".wig");
+                std::cout << "Writing file " << temp_name << std::endl;
+                pFile = fopen(temp_name, "w");
+                if (pFile != NULL)
+                {
+                    fprintf(pFile, "track\ttype=wiggle_0\tname=%s\tvisibility=full\tautoScale=off\tmaxHeightPixels=100:50:10\tviewLimits=0.0:100.0\tyLineOnOff=off\n", outname[i].c_str());
+                    //print chr1-chr22
+                    for (int j = 0; j < 22; j++)
+                    {
+                        fprintf(pFile, "variableStep\tchrom=chr%d\tspan=%d\n", j + 1, bin_size);
+                        for (it = location[j].begin(); it != location[j].end(); it++)
+                        {
+                            value = pow(2, data_out[i][count]) - 1;
+                            if (value < 0)
+                            {
+                                value = 0;
+                            }
+                            else if (value > pow(2,up_bound))
+                            {
+                                value = pow(2,up_bound);
+                            }
+                            count++;
+                            fprintf(pFile, "%d\t%lf\n", (*it), value);        //report value is limited from 0 to 10000.
+                        }
+                    }
+                    //print chrX
+                    fprintf(pFile, "variableStep\tchrom=chrX\tspan=%d\n", bin_size);
+                    for (it = location[22].begin(); it != location[22].end(); it++)
+                    {
+                        value = pow(2, data_out[i][count]) - 1;
+                        if (value < 0)
+                        {
+                            value = 0;
+                        }
+                        else if (value > pow(2,up_bound))
+                        {
+                            value = pow(2,up_bound);
+                        }
+                        count++;
+                        fprintf(pFile, "%d\t%lf\n", (*it), value);
+                    }
 
-		for (int i = 0; i < sample_size; i++)
-		{
-			count = 0;
-			strcpy(temp_name, outfile);
-			strcat(temp_name, ".");
-			strcat(temp_name, outname[i].c_str());
-			strcat(temp_name, ".wig");
-			std::cout << "Writing file " << temp_name << std::endl;
-			pFile = fopen(temp_name, "w");
-			if (pFile != NULL)
-			{
-				fprintf(pFile, "track\ttype=wiggle_0\tname=%s\tvisibility=full\tautoScale=off\tmaxHeightPixels=100:50:10\tviewLimits=0.0:100.0\tyLineOnOff=off\n", outname[i].c_str());
-				//print chr1-chr22
-				for (int j = 0; j < 22; j++)
-				{
-					fprintf(pFile, "variableStep\tchrom=chr%d\tspan=%d\n", j + 1, bin_size);
-					for (it = location[j].begin(); it != location[j].end(); it++)
-					{
-						value = pow(2, data_out[i][count]) - 1;
-						if (value < 0)
-						{
-							value = 0;
-						}
-						else if (value > pow(2,up_bound))
-						{
-							value = pow(2,up_bound);
-						}
-						count++;
-						fprintf(pFile, "%d\t%lf\n", (*it), value);        //report value is limited from 0 to 10000.
-					}
-				}
-				//print chrX
-				fprintf(pFile, "variableStep\tchrom=chrX\tspan=%d\n", bin_size);
-				for (it = location[22].begin(); it != location[22].end(); it++)
-				{
-					value = pow(2, data_out[i][count]) - 1;
-					if (value < 0)
-					{
-						value = 0;
-					}
-					else if (value > pow(2,up_bound))
-					{
-						value = pow(2,up_bound);
-					}
-					count++;
-					fprintf(pFile, "%d\t%lf\n", (*it), value);
-				}
+                    fclose(pFile);
+                }
+                else
+                {
+                    std::cout << "Error! Cannot write file " << temp_name << std::endl;
+                    return 1;
+                }
 
-				fclose(pFile);
-			}
-			else
-			{
-				std::cout << "Error! Cannot write file " << temp_name << std::endl;
-				return 1;
-			}
+            }
+        }
+        else
+        {
+            for (int i = 0; i < sample_size; i++)
+            {
+                count = 0;
+                strcpy(temp_name, outfile);
+                strcat(temp_name, ".");
+                strcat(temp_name, outname[i].c_str());
+                strcat(temp_name, ".wig");
+                std::cout << "Writing file " << temp_name << std::endl;
+                pFile = fopen(temp_name, "w");
+                if (pFile != NULL)
+                {
+                    fprintf(pFile, "track\ttype=wiggle_0\tname=%s\tvisibility=full\tautoScale=off\tmaxHeightPixels=100:50:10\tviewLimits=0.0:100.0\tyLineOnOff=off\n", outname[i].c_str());
+                    //print chr1-chr22
+                    for (int j = 0; j < 22; j++)
+                    {
+                        fprintf(pFile, "variableStep\tchrom=chr%d\tspan=%d\n", j + 1, bin_size);
+                        for (it = location[j].begin(); it != location[j].end(); it++)
+                        {
+                            value = data_out[i][count];
+                            if (value < 0)
+                            {
+                                value = 0;
+                            }
+                            else if (value > up_bound)
+                            {
+                                value = up_bound;
+                            }
+                            count++;
+                            fprintf(pFile, "%d\t%lf\n", (*it), value);        //report value is limited from 0 to 10000.
+                        }
+                    }
+                    //print chrX
+                    fprintf(pFile, "variableStep\tchrom=chrX\tspan=%d\n", bin_size);
+                    for (it = location[22].begin(); it != location[22].end(); it++)
+                    {
+                        value = data_out[i][count];
+                        if (value < 0)
+                        {
+                            value = 0;
+                        }
+                        else if (value > up_bound)
+                        {
+                            value = up_bound;
+                        }
+                        count++;
+                        fprintf(pFile, "%d\t%lf\n", (*it), value);
+                    }
 
-		}
+                    fclose(pFile);
+                }
+                else
+                {
+                    std::cout << "Error! Cannot write file " << temp_name << std::endl;
+                    return 1;
+                }
+
+            }
+        }
+        
 	}
 	return 0;
 }
@@ -663,10 +727,11 @@ void help_info()
 	std::cout << "WIG output will save each sample as a WIG file." << std::endl;
 	std::cout << "Options:" << std::endl;
 	std::cout << "-b   Specify library file. If not sepecified,the program will search for model_file.bin in the current directory." << std::endl;
-	std::cout << "-i   Specify input file (gene expression obtained from GeneBASE)." << std::endl;
+	std::cout << "-i   Specify input file (gene expression matrix)." << std::endl;
 	std::cout << "-o   Specify output file." << std::endl;
 	std::cout << "-u   Set upper bound for predicted values (default:14)." << std::endl;
 	std::cout << "-w   Output WIG file for each sample." << std::endl;
+    std::cout << "-wt  Output WIG file for each sample with log-transformed value." << std::endl;
 	std::cout << "-l   Use locus-level model for prediction." << std::endl;
     std::cout << "-e   Use exact id match for matching the gene expression data." << std::endl;
 	return;

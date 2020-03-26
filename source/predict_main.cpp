@@ -7,6 +7,7 @@ int main(int argc, char *argv[])
     char outfile_expr[255];
 	char libfile[255]="./model_file.bin";
 	int write_flag = 0;
+    int log_flag = 0;
 	int locus_model = 0;
 	double up_bound = 14;
 	int opt;
@@ -19,7 +20,7 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
-	while ((opt = getopt(argc,argv,"b:i:o:u:whle")) != EOF)
+	while ((opt = getopt(argc,argv,"b:i:o:u:wthle")) != EOF)
 	{
 		switch(opt)
 		{
@@ -38,6 +39,9 @@ int main(int argc, char *argv[])
 			case 'w':
 				write_flag = 1;
 				break;
+            case 't':
+                log_flag = 1;
+                break;
 			case 'h':
 				help_info();
 				return 1;
@@ -279,7 +283,7 @@ int main(int argc, char *argv[])
 
   	//write output file
 	std::cout << "Writing output file..." << std::endl;
-	if (WriteWIG(output, select_loci, exonin.sample_name, outfile, bin_size, loci_size, sample_size, write_flag, up_bound))
+	if (WriteWIG(output, select_loci, exonin.sample_name, outfile, bin_size, loci_size, sample_size, write_flag, up_bound, log_flag))
 	{
 		return 1;
 	}
