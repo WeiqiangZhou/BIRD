@@ -96,6 +96,10 @@ To get WIG format output, run:
 ```
 path_to_BIRD/BIRD_predict -b path_to_model/human_hg19_model.bin -i FPKM_data_matrix.txt -o output_name -w
 ```
+To get WIG format output with log-transformed values, run:
+```
+path_to_BIRD/BIRD_predict -b path_to_model/human_hg19_model.bin -i FPKM_data_matrix.txt -o output_name -wt
+```
 In this mode, BIRD will generate WIG file for each sample with prefix "output_name." followed by the column name in the input_file.txt.
 
 WIG file can be visualized in UCSC genome browser by adding custom tracks:
@@ -118,10 +122,11 @@ WIG output: BIRD_predict -b model_file.bin -i input_file.txt -o output_name -w
 WIG output will save each sample as a WIG file.
 Options:
 -b   Specify library file. If not sepecified,the program will search for model_file.bin in the current directory.
--i   Specify input file (gene expression obtained from GeneBASE).
+-i   Specify input file (gene expression matrix).
 -o   Specify output file.
 -u   Set upper bound for predicted values (default:14).
 -w   Output WIG file for each sample.
+-wt  Output WIG file for each sample with log-transformed value.
 -l   Use locus-level model for prediction.  
 -e   Use exact id match for matching the gene expression data.
 ```
