@@ -38,7 +38,7 @@ get_dist <- function(train_expr,input_expr,cluster_num=1000){
 
 ##example
 ##read in training RNA-seq data
-train_expr <- readRDS("RNA_data_167_cells.rds")
+train_expr <- readRDS("/BIRD_dir/data/RNA_data_167_cells.rds")
 ##read in input data, first column should be ensembl gene ids
 input_expr <- data.frame(fread("input_expr.txt"),row.names=1)
 ##get training-test distance
