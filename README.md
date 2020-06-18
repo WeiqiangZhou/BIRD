@@ -7,7 +7,7 @@ BIRD is a software to predict DNase I hypersensitivity (DNase-seq signal) based 
 
 **06/18/2020:**
 
-Add RNA-seq data and an R script for calculating train-test distance.
+Add RNA-seq data (167 samples hg19 model) and an R script for calculating train-test distance.
 
 **03/26/2020:**
 
