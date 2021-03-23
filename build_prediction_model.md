@@ -11,7 +11,7 @@ chromosome  start    end  AG04449  AG04450   AG10803      AoAF        BJ
       chr1 235600 235799 1.305501 1.845236 0.6930962 2.1039988 1.3927213
 ```
 
-Example of the gene expression data (the first column is the ids for each gene, e.g., gene names, ensembl gene ids):
+Example of the gene expression data (the first column is the ids for each gene, e.g., transcript cluster ids from exon array or gene names, ensembl gene ids from RNA-seq):
 ```
 Gene_id   AG04449   AG04450   AG10803      AoAF        BJ       Hac
 2359453  6.289403  6.908867  6.438640  7.766761  5.423756  7.028196
