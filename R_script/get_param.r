@@ -78,8 +78,9 @@ cluster_data_mean <- function(Exon_data,cluster){
 }
 
 ##main script##
-Exon_data <- as.matrix(read.table(file="Exon_data_train.txt",header=TRUE,row.names=1))   #input gene expression data
-load("DNase_data_train.rda")  #input DNase-seq data, first three columns contain the genomic locus information 
+##download data from https://github.com/WeiqiangZhou/BIRD-data/releases/download/v1.0/BIRD_data.zip
+Exon_data <- as.matrix(readRDS("Exon_data_57_cells.rds"))   #input gene expression data
+DNase_data <- readRDS("DNase_data_57_cells.rds")  #input DNase-seq data, first three columns contain the genomic locus information 
 
 set.seed(2015)
 DNase_sub <- as.matrix(DNase_data[,-c(1:3)])[sample(1:dim(DNase_data)[1],floor(0.01*dim(DNase_data)[1])),]  #randomly sample 1% of DHSs
