@@ -87,7 +87,7 @@ Num_predictor <- 7  ##different number of cluster can be set here
 Bin_size <- 200  ##bin size depends on the preprocess of DNase data, we used 200 in BIRD
 
 ##input data are Exon_data_sample.txt and DNase_data_sample.rda
-Exon_train <- as.matrix(read.table(file="Exon_data.txt",header=TRUE,row.names=1))  ##read quantile normalized gene expression data
+Exon_train <- as.matrix(readRDS("Exon_data_57_cells.rds"))  ##read quantile normalized gene expression data
 Exon_quantile <- compute_quantile(Exon_train) #calculate the quantiles of the gene expression data
 Exon_processed <- standardize_row_train(Exon_train) #standardize gene expression data
 Exon_mean_sd <- Exon_processed$mean_sd
@@ -104,7 +104,7 @@ write.table(Exon_cluster$cluster,file="cluster_idx.txt",sep="\t",row.names=FALSE
 Exon_train_mean <- cluster_data_mean(Exon_train_sd,Exon_cluster$cluster) #calculated average gene expression within each cluster
 
 ##Locus-level prediction##
-load("DNase_data.rda")  ##read DNase-seq data, first three columns contain the genomic locus information
+DNase_data <- readRDS("DNase_data_57_cells.rds")  ##read DNase-seq data, first three columns contain the genomic locus information
 DNase_processed <- standardize_row_train(as.matrix(DNase_data[,-c(1:3)])) #standardize DNase-seq data
 DNase_mean_sd <- DNase_processed$mean_sd
 DNase_train_sd <- DNase_processed$train
