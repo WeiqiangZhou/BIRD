@@ -6,6 +6,9 @@
 # After generating the required files, use [BIRD_build_library -i par_file.txt -o model_file.bin] to compile the model file 
 #############################################################################################################################
 
+##turn off scientific notation to write genomic locus
+options(scipen=999)
+
 ####functions####
 ##get regression coefficient and predictors
 get_regression_info <- function(DNase_train,Exon_train_mean,top_n){
